@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "GrowthWebApp"
+  "defaultProject": "GrowthWebApp",
+  "cli": {
+    "analytics": false
+  }
 }
