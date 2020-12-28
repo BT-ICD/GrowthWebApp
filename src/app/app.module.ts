@@ -83,6 +83,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {MenuService} from './app.menu.service';
+import { SubjectModule } from './Master/Subject/subject.module';
 
 @NgModule({
   declarations: [
@@ -164,7 +165,11 @@ import {MenuService} from './app.menu.service';
         TreeTableModule,
         VirtualScrollerModule,
         AppCodeModule,
+
+
+        SubjectModule,
       AppRoutingModule
+      
   ],
   providers: [{provide:MenuService}],
   bootstrap: [AppComponent]
