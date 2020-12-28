@@ -7,10 +7,28 @@
                   <h5 class="mt-2">Subjects</h5>
                 </div>
                 <div class="col-md-8 d-flex justify-content-end">
-                    <p-button icon="pi pi-plus"  label="New" [routerLink]="['/subject','add']" ></p-button>
-                    <p-button label="Edit" icon="pi pi-pencil" class="ml-2" (click)="editRecord()"></p-button>
-                    <button pButton type="button" label="Delete" icon="pi pi-trash" (click)="deleteRecord()" class="p-button-warning p-button-outlined ml-2"></button>
+                    <div class="row">
+
+                    
+                    <div class="col">
+                        <button pButton  type="button" label="Chapters" class="p-button-outlined mr-1"></button>
+                    </div>
+                    <div class="col">
+                        <p-button icon="pi pi-plus"  label="New" [routerLink]="['/subject','add']" ></p-button>
+                    </div>
+                    <div class="col">
+                        <p-button label="Edit" icon="pi pi-pencil"  (click)="editRecord()"></p-button>
+                    </div>
+                    <div class="col">
+                        <button pButton type="button" label="Delete" icon="pi pi-trash" (click)="deleteRecord()" ></button>
+                    </div>
+                    </div>
+                    
                 </div>
+                <!-- <div class="col-md-2">
+                    <div class="d-flex justify-content-end">
+                </div>
+                </div> -->
             </div>
              <!-- Table - List of Subject Row -->
        <div class="row mt-1">
@@ -26,7 +44,7 @@
                         </div>
                         <div class="col-md-11 d-flex justify-content-end">
                             <i class="pi pi-search" style="margin: 4px 4px 0 0"></i>
-                            <input type="text" pInputText size="50" placeholder="Global Filter"
+                            <input type="text" pInputText  placeholder="Global Filter"
                                 (input)="dt.filterGlobal($event.target.value, 'contains')" style="width: auto" />
                         </div>
                     </div>

@@ -58,15 +58,17 @@ export class SubjectListComponent implements OnInit {
       alert('None record selected. Please select a record and try again!');
       return ;
     }
-    this.subjectDataService.delete(this.selectedSubject.subjectId).subscribe((data)=>{
-      if(data.rowsAffected===1){
-        //To display toast
-        this.messageService.add({severity: 'info', summary: 'Info Message', detail: 'Record Deleted'});
-        //To deleted element from an array
-        let index = this.subjects.findIndex(obj=>obj.subjectId === this.selectedSubject.subjectId);
-        this.subjects.splice(index,1);
-        this.selectedSubject=null;
-      }
-    })
+    if(confirm('You are about to delele a record. Are you sure?')){
+      this.subjectDataService.delete(this.selectedSubject.subjectId).subscribe((data)=>{
+        if(data.rowsAffected===1){
+          //To display toast
+          this.messageService.add({severity: 'info', summary: 'Record deleted', detail: this.selectedSubject.name});
+          //To deleted element from an array
+          let index = this.subjects.findIndex(obj=>obj.subjectId === this.selectedSubject.subjectId);
+          this.subjects.splice(index,1);
+          this.selectedSubject=null;
+        }
+      });
+    }
   }
 }

@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AccordionModule} from 'primeng/accordion';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
-import {ButtonModule} from 'primeng/button';
+// import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {CardModule} from 'primeng/card';
 import {CarouselModule} from 'primeng/carousel';
@@ -53,7 +53,7 @@ import {PickListModule} from 'primeng/picklist';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {RatingModule} from 'primeng/rating';
-import {RippleModule} from 'primeng/ripple';
+// import {RippleModule} from 'primeng/ripple';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {SidebarModule} from 'primeng/sidebar';
@@ -62,13 +62,13 @@ import {SliderModule} from 'primeng/slider';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {StepsModule} from 'primeng/steps';
 import {TabMenuModule} from 'primeng/tabmenu';
-import {TableModule} from 'primeng/table';
+// import {TableModule} from 'primeng/table';
 import {TabViewModule} from 'primeng/tabview';
 import {TerminalModule} from 'primeng/terminal';
 import {TieredMenuModule} from 'primeng/tieredmenu';
-import {ToastModule} from 'primeng/toast';
+// import {ToastModule} from 'primeng/toast';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-import {ToolbarModule} from 'primeng/toolbar';
+// import {ToolbarModule} from 'primeng/toolbar';
 import {TooltipModule} from 'primeng/tooltip';
 import {TreeModule} from 'primeng/tree';
 import {TreeTableModule} from 'primeng/treetable';
@@ -98,77 +98,17 @@ import { SubjectModule } from './Master/Subject/subject.module';
     FormsModule,
     HttpClientModule,
         BrowserAnimationsModule,
-        AccordionModule,
-        AutoCompleteModule,
-        BreadcrumbModule,
-        ButtonModule,
-        CalendarModule,
-        CardModule,
-        CarouselModule,
-        // ChartModule,
-        CheckboxModule,
-        ChipsModule,
-        CodeHighlighterModule,
-        ConfirmDialogModule,
-        ColorPickerModule,
-        ContextMenuModule,
-        DataViewModule,
-        DialogModule,
-        DropdownModule,
-        FieldsetModule,
-        FileUploadModule,
-        FullCalendarModule,
-        GalleriaModule,
-        InplaceModule,
-        InputNumberModule,
-        InputMaskModule,
-        InputSwitchModule,
-        InputTextModule,
-        InputTextareaModule,
-        LightboxModule,
-        ListboxModule,
         MegaMenuModule,
         MenuModule,
         MenubarModule,
-        MessageModule,
-        MessagesModule,
-        MultiSelectModule,
-        OrderListModule,
-        // OrganizationChartModule,
-        OverlayPanelModule,
-        PaginatorModule,
-        PanelModule,
-        PanelMenuModule,
-        PasswordModule,
-        PickListModule,
-        ProgressBarModule,
-        RadioButtonModule,
-        RatingModule,
-        RippleModule,
-        ScrollPanelModule,
-        SelectButtonModule,
-        SidebarModule,
-        SlideMenuModule,
-        SliderModule,
-        SplitButtonModule,
-        StepsModule,
-        TableModule,
-        TabMenuModule,
-        TabViewModule,
-        TerminalModule,
-        TieredMenuModule,
-        ToastModule,
-        ToggleButtonModule,
-        ToolbarModule,
-        TooltipModule,
-        TreeModule,
-        TreeTableModule,
-        VirtualScrollerModule,
         AppCodeModule,
 
 
         SubjectModule,
-      AppRoutingModule
+        
+        AppRoutingModule,
+      
+      
       
   ],
   providers: [{provide:MenuService}],
