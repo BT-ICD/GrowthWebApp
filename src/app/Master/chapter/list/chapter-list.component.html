@@ -4,17 +4,15 @@
             <!-- Header Tool bar Row -->
             <div class="row">
                 <div class="col-md-4">
-                  <h5 class="mt-2">Subjects</h5>
+                  <h5 class="mt-2">Chapters</h5>
                 </div>
                 <div class="col-md-8 d-flex justify-content-end">
                     <div class="row">
-
-                    
                     <div class="col">
-                        <button pButton  type="button" label="Chapters" class="p-button-outlined mr-1" (click)="moveToChapterList()"></button>
+                        <button pButton  type="button" label="Topics" class="p-button-outlined mr-1" ></button>
                     </div>
                     <div class="col">
-                        <p-button icon="pi pi-plus"  label="New" [routerLink]="['/subject','add']" ></p-button>
+                        <p-button icon="pi pi-plus"  label="New" [routerLink]="['/chapteradd']" ></p-button>
                     </div>
                     <div class="col">
                         <p-button label="Edit" icon="pi pi-pencil"  (click)="editRecord()"></p-button>
@@ -30,11 +28,16 @@
                 </div>
                 </div> -->
             </div>
+            <div class="row">
+                <div class="col-md-5">
+                    Subject: <span class="text-primary">{{subjectName}}</span> 
+                </div>
+            </div>
              <!-- Table - List of Subject Row -->
        <div class="row mt-1">
             <div class="col-md-12">
-                <p-table #dt [columns]="cols" [value]="subjects" selectionMode="single"
-                [(selection)]="selectedSubject" [paginator]="true" [rows]="10" dataKey="subjectId"
+                <p-table #dt [columns]="cols" [value]="chapters" selectionMode="single"
+                [(selection)]="selectedChapter" [paginator]="true" [rows]="10" dataKey="chapterId"
                 styleClass="p-datatable-sm">
                 <ng-template pTemplate="caption">
                     <div class="form-group row">
@@ -59,10 +62,10 @@
                     
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-subject let-columns="columns">
-                    <tr [pSelectableRow]="subject">
+                <ng-template pTemplate="body" let-chapter let-columns="columns">
+                    <tr [pSelectableRow]="chapter">
                         <td *ngFor="let col of columns" [ngStyle]="{display: col.display}">
-                            {{subject[col.field]}}
+                            {{chapter[col.field]}}
                         </td>
                     </tr>
                 </ng-template>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {Message, MessageService} from 'primeng/api';
+import { MessageService} from 'primeng/api';
 import { SubjectDataService } from '../subject-data.service';
 import { ISubjectList, SubjectListResolver } from '../subject-types';
 
@@ -70,5 +70,13 @@ export class SubjectListComponent implements OnInit {
         }
       });
     }
+  }
+  ///Navigate to chapter list component
+  moveToChapterList():void{
+    if(!this.selectedSubject){
+      alert('None record selected. Please select a record and try again!');
+      return ;
+    }
+    this.router.navigate(['/chapter', this.selectedSubject.subjectId, this.selectedSubject.name]);
   }
 }

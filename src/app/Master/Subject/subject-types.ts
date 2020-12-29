@@ -26,6 +26,3 @@ export interface ISubjectResolver{
     subject:ISubjectDetail,
     error?:string
 }
-export interface DeleteResponse{
-    rowsAffected:number;
-}

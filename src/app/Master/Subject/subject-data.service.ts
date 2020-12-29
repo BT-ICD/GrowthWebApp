@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataConstantsService } from 'src/app/Core/data-constants.service';
-import { DeleteResponse, ISubjectAdd, ISubjectDetail, ISubjectList } from './subject-types';
+import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
+import { IDeleteResponse } from 'src/app/Core/types/common-types';
+import {  ISubjectAdd, ISubjectDetail, ISubjectList } from './subject-types';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,8 @@ export class SubjectDataService {
     const url:string = this.dataConstantsService.BASEAPIURL + 'Subject/edit';
     return this.http.post<ISubjectDetail>(url,subjectDetail);
   }
-  delete(id:number):Observable<DeleteResponse>{
+  delete(id:number):Observable<IDeleteResponse>{
     const url:string = this.dataConstantsService.BASEAPIURL + 'Subject/delete/' + id;
-    return this.http.post<DeleteResponse>(url,null);
+    return this.http.post<IDeleteResponse>(url,null);
   }
 }

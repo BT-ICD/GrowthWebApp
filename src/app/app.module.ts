@@ -84,6 +84,7 @@ import { AppComponent } from './app.component';
 
 import {MenuService} from './app.menu.service';
 import { SubjectModule } from './Master/Subject/subject.module';
+import { ChapterModule } from './Master/chapter/chapter.module';
 
 @NgModule({
   declarations: [
@@ -105,11 +106,8 @@ import { SubjectModule } from './Master/Subject/subject.module';
 
 
         SubjectModule,
-        
-        AppRoutingModule,
-      
-      
-      
+        ChapterModule,
+        AppRoutingModule
   ],
   providers: [{provide:MenuService}],
   bootstrap: [AppComponent]
