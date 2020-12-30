@@ -6,6 +6,7 @@ import { ChapterListResolveService } from './list/chapter-list-resolve.service';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { ChapterAddComponent } from './add/chapter-add.component';
 import { ChapterEditComponent } from './edit/chapter-edit.component';
+import { SubjectLookupResolverService } from 'src/app/Core/services/subject-lookup-resolver.service';
 
 
 
@@ -22,11 +23,13 @@ import { ChapterEditComponent } from './edit/chapter-edit.component';
       },
       {
         path:'chapteradd',
-        component:ChapterAddComponent
+        component:ChapterAddComponent,
+        resolve:{resolveData:SubjectLookupResolverService}
       },
       {
         path:'chapteredit/:id',
-        component:ChapterEditComponent
+        component:ChapterEditComponent,
+        resolve:{resolveSubjectList:SubjectLookupResolverService}
       }
     ])
   ]

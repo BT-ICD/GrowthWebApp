@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ToastModule } from 'primeng/toast';
     TableModule,
     ButtonModule,
     RippleModule,
-    ToastModule
+    ToastModule,
+    DropdownModule
   ]
 })
 export class PrimeNGModulesModule { }
