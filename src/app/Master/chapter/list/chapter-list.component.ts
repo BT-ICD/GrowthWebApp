@@ -57,7 +57,7 @@ export class ChapterListComponent implements OnInit {
       alert('None record selected. Please select a record and try again!');
       return ;
     }
-    this.router.navigate(['/chapteredit', this.selectedChapter.chapterId]);
+    this.router.navigate(['/chapteredit', this.selectedChapter.chapterId],{state:{subjectId:this.subjectId, subjectName:this.subjectName}});
     
   }
   deleteRecord():void{

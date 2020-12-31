@@ -12,7 +12,7 @@
                         <button pButton  type="button" label="Topics" class="p-button-outlined mr-1" ></button>
                     </div>
                     <div class="col">
-                        <p-button icon="pi pi-plus"  label="New" [routerLink]="['/chapteradd']" ></p-button>
+                        <p-button icon="pi pi-plus"  label="New" [routerLink]="['/chapteradd']" [state]="{subjectId:subjectId, subjectName:subjectName}" ></p-button>
                     </div>
                     <div class="col">
                         <p-button label="Edit" icon="pi pi-pencil"  (click)="editRecord()"></p-button>

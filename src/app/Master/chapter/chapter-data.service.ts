@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
 import { IDeleteResponse } from 'src/app/Core/types/common-types';
-import { IChapterDTOAdd, IChapterDTODetail, IChapterDTOList } from './chapter-types';
+import { IChapterDTOAdd, IChapterDTODetail, IChapterDTOEdit, IChapterDTOList } from './chapter-types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ChapterDataService {
     return this.http.get<IChapterDTOList[]>(url);
   }
   getById(chapterId:number):Observable<IChapterDTODetail>{
-    const url:string = this.dataConstantsService.BASEAPIURL + 'GetById/' + chapterId;
+    const url:string = this.dataConstantsService.BASEAPIURL + 'Chapter/GetById/' + chapterId;
     return this.http.get<IChapterDTODetail>(url);
   }
   getInitializeChapterToAdd():IChapterDTOAdd{
@@ -31,8 +31,9 @@ export class ChapterDataService {
     const url: string = this.dataConstantsService.BASEAPIURL + 'Chapter/add';
     return this.http.post<IChapterDTODetail>(url,chapterDTOAdd);
   }
-  edit(chapterDTODetail:IChapterDTODetail):void{
-
+  edit(chapterDTODetail:IChapterDTOEdit):Observable<IChapterDTODetail>{
+    const url:string = this.dataConstantsService.BASEAPIURL + 'Chapter/edit';
+    return this.http.post<IChapterDTODetail>(url, chapterDTODetail);
   }
   delete(chapterId:number){
     const url:string = this.dataConstantsService.BASEAPIURL + 'Chapter/Delete/' + chapterId;

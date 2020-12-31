@@ -1,1 +1,81 @@
-<p>chapter-edit works!</p>
+<div class="container-fluid">
+    <div class="p-card">
+        <!-- Header Row -->
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="mt-2">Chapter</h5>
+            </div>
+        </div>
+        <!-- Form Controls Row -->
+        <form [formGroup]="chapterForm" (ngSubmit)="onSubmit()">
+            <div class="p-card mt-2">
+                    <!-- Chapter Id -->
+                    <div class="row mt-1" >
+                        <label for="chapterId" class="col-md-2" >Id</label>
+                        <div class="col-md-8">
+                            <input id="chapterId" class="col-md-4" name="chapterId" type="number" formControlName="chapterId"    pInputText readonly
+                                [ngClass]="{'is-invalid':((chapterForm.get('chapterId').touched ||chapterForm.get('chapterId').dirty) &&
+                                    !chapterForm.get('chapterId').valid)
+
+                                }"
+                            ><small class="text-danger">*</small>
+                            <span class="invalid-feedback">
+                                <span *ngIf="chapterForm.get('chapterId').errors?.required">
+                                    Chapter Id is required
+                                </span>
+                            </span>
+                        </div>   
+                    </div>
+                
+                    <!-- Chapter Name -->
+                    <div class="row mt-1" >
+                        <label for="name" class="col-md-2" >Name</label>
+                        <div class="col-md-8">
+                            <input id="name" class="col-md-4" name="name" type="text" formControlName="name"  role="textbox"  pInputText 
+                                [ngClass]="{'is-invalid':((chapterForm.get('name').touched ||chapterForm.get('name').dirty) &&
+                                    !chapterForm.get('name').valid)
+
+                                }"
+                            ><small class="text-danger">*</small>
+                            <span class="invalid-feedback">
+                                <span *ngIf="chapterForm.get('name').errors?.required">
+                                    Name is required
+                                </span>
+                            </span>
+                        </div>   
+                    </div>
+                    <!-- Chapter Sr No -->
+                    <div class="row mt-1">
+                        <label for="chapterSrNo" class="col-md-2" >Serial Number</label>
+                        <div class="col-md-8">
+                            <input id="chapterSrNo" class="col-md-4" name="chapterSrNo" type="number" formControlName="chapterSrNo" role="textbox" pInputText>
+                        </div>
+                    </div>
+                    <!-- Subject -->
+                    <div class="row mt-1">
+                        <label for="subjectId" class="col-md-2" >Subject</label>
+                        <div class="col-md-8">
+                            <p-dropdown  id="subjectId" [options]="subjectLookup"  formControlName="subjectId" optionLabel="name" optionValue="subjectId"
+                                required="true" datakey="subjectId"  placeholder="Select Subject"
+                            ></p-dropdown>
+                        </div>
+                    </div>
+                    <!--  Notes -->
+                    <div class="row mt-1">
+                        <label for="notes" class="col-md-2" >Notes</label>
+                        <div class="col-md-8">
+                            <textarea id="notes" class="col-md-4" name="notes" type="text" formControlName="notes"  rows="4"></textarea>
+                        </div>
+                    </div>
+                    
+            </div>
+            <!-- Action Buttons -->
+            <div class="p-card mt-2">
+                <div class="col-md-4 offset-md-2">
+                        <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
+                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/chapter', subjectId, subjectName]" pButton></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

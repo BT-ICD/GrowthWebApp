@@ -4,6 +4,13 @@ export interface IChapterDTOList{
     name:string,
     notes:string
 }
+export interface IChapterDTOEdit{
+    chapterId:number,
+    chapterSrNo:number,
+    name:string,
+    subjectId:number,
+    notes:string
+}
 export interface IChapterDTODetail{
     chapterId:number,
     chapterSrNo:number,
@@ -25,6 +32,7 @@ export interface IChapterListResolver{
     error?:any
 }
 export interface IChapterResolver{
-    chapters:IChapterDTODetail,
+    chapter:IChapterDTODetail,
+   
     error?:any
 }

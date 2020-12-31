@@ -17,7 +17,14 @@ chapterForm:FormGroup;
 subjectLookup:ISubjectLookup[];
 subjectLookupResolver:ISubjectLookupResolver;
 selectedSubject:ISubjectLookup;
-  constructor ( private route:ActivatedRoute, private router:Router, private chapterDataService:ChapterDataService, private fb:FormBuilder) { }
+subjectId:number;
+subjectName:string;
+  constructor ( private route:ActivatedRoute, private router:Router, private chapterDataService:ChapterDataService, private fb:FormBuilder) { 
+    let stateObj = this.router.getCurrentNavigation().extras.state;
+    this.subjectId = stateObj.subjectId;
+    this.subjectName= stateObj.subjectName;
+    
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe((data)=>{
@@ -41,13 +48,13 @@ selectedSubject:ISubjectLookup;
     })
   }
   onSubmit():void{
-    console.log(this.chapterForm.valid);
-    console.log(this.chapterForm.value);
+   
     if(this.chapterForm.valid){
       this.chapterAdd = Object.assign(this.chapterForm.value)
-      console.log(this.chapterAdd);
+      
       this.chapterDataService.addNew(this.chapterAdd).subscribe((data)=>{
         console.log(data);
+        this.router.navigate(['/chapter', this.subjectId,this.subjectName]);
       })
     }
   }
