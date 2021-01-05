@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="p-card">
+        <!-- Header Row -->
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="mt-2">New Schedule</h5>
+            </div>
+        </div>
+        <!-- Form Controls Row -->
+        <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+            <div class="p-card mt-2">
+                    <!-- scheduleId -->
+                    <div class="row mt-1" >
+                        <label for="scheduleId" class="col-md-2" >Session Id</label>
+                        <div class="col-md-8">
+                            <input id="scheduleId" class="col-md-4" name="scheduleId" type="text" formControlName="scheduleId"  role="textbox"  pInputText  readonly>
+                        </div>   
+                    </div>                
+                    <!-- Batch -->
+                    <div class="row mt-1">
+                        <label for="batchId" class="col-md-2" >Batch</label>
+                        <div class="col-md-8">
+                            <p-dropdown  id="batchId" [options]="batchLookup"  formControlName="batchId" optionLabel="code" optionValue="batchId"
+                                required="true" datakey="batchId"  placeholder="Select Batch"
+                            ></p-dropdown>
+                        </div>
+                    </div>
+                    <!-- Subject -->
+                    <div class="row mt-1">
+                        <label for="subjectId" class="col-md-2" >Subject</label>
+                        <div class="col-md-8">
+                            <p-dropdown  id="subjectId" [options]="subjectLookup"  formControlName="subjectId" optionLabel="name" optionValue="subjectId"
+                                required="true" datakey="subjectId"  placeholder="Select Subject"
+                            ></p-dropdown>
+                        </div>
+                    </div>
+                    <!--  lectureFrom -->
+                    <div class="row mt-1">
+                        <label for="lectureFrom" class="col-md-2" >From</label>
+                        <div class="col-md-8">
+                            <p-calendar name="lectureFrom" id="lectureFrom" formControlName="lectureFrom" showTime="true" hourFormat="12" ></p-calendar>
+                        </div>
+                    </div>
+                    <!--  lectureTo -->
+                    <div class="row mt-1">
+                        <label for="lectureTo" class="col-md-2" >To</label>
+                        <div class="col-md-8">
+                            <p-calendar name="lectureTo" id="lectureTo" formControlName="lectureTo" showTime="true" hourFormat="12" ></p-calendar>
+                        </div>
+                    </div>
+
+                    <!-- sessionContent -->
+                    <div class="row mt-1" >
+                        <label for="sessionContent" class="col-md-2" >Session Content</label>
+                        <div class="col-md-8">
+                            <input id="sessionContent" class="col-md-4" name="sessionContent" type="text" formControlName="sessionContent"  role="textbox"  pInputText 
+                                [ngClass]="{'is-invalid':((scheduleForm.get('sessionContent').touched ||scheduleForm.get('sessionContent').dirty) &&
+                                            !scheduleForm.get('sessionContent').valid)
+                                            }"
+                            ><small class="text-danger">*</small>
+                            <span class="invalid-feedback">
+                                <span *ngIf="scheduleForm.get('sessionContent').errors?.required">
+                                    Session content is required
+                                </span>
+                            </span>
+                        </div>   
+                    </div>
+                    <!--  Notes -->
+                    <div class="row mt-1">
+                        <label for="notes" class="col-md-2" >Notes</label>
+                        <div class="col-md-8">
+                            <textarea id="notes" class="col-md-4" name="notes" type="text" formControlName="notes"  rows="4"></textarea>
+                        </div>
+                    </div>
+                    
+            </div>
+            <!-- Action Buttons -->
+            <div class="p-card mt-2">
+                <div class="col-md-4 offset-md-2">
+                        <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
+                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/schedule']" pButton></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

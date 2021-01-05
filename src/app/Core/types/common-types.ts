@@ -10,6 +10,16 @@ export interface ISubjectLookupResolver{
     subjects:ISubjectLookup[];
     error?:any;
 }
+//To fill id and code  of batch - for dropdown
+export interface IBatchLookup{
+    batchId:number,
+    code:string
+}
+export interface IBatchLookupResolver{
+    batchList:IBatchLookup[];
+    error?:any;
+}
+
 //To fill id and value of chapters - for dropdown
 export interface IChapterLookup{
     chapterId:number,
