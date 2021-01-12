@@ -43,3 +43,18 @@ export interface IScheduleResolver{
     schedule:IScheduleDetail,
     error?:any
 }
+//To get as well as submit attendance details for particular schedule
+export interface IScheduleAddendanceDTOList{
+    scheduleId:number,
+    studentId:number,
+    name:string,
+    status:boolean
+}
+export interface IAttendanceDTOAdd{
+    studentId:number,
+    status:boolean
+}
+export interface IAttendanceDTOSubmit{
+    scheduleId:number,
+    students:IAttendanceDTOAdd[]
+}

@@ -1,6 +1,9 @@
 export interface IDeleteResponse{
     rowsAffected:number;
 }
+export interface IRecordsAffectedResponse{
+    recordsAffected:number;
+}
 //To fill id and value of subjets - for dropdown
 export interface ISubjectLookup{
     subjectId:number,

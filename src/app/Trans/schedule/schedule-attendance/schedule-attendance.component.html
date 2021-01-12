@@ -1,0 +1,37 @@
+
+    <p-dialog header="Attendance" [(visible)]="displayAttendance" position="top"  [style]="{width: '50vw'}"
+            (onShow)="onShow()" (onHide)="onHide()" [modal]="true"
+        >
+        <p-header>
+        </p-header>
+        <div class="row">
+            <div class="col-md-3">
+                Schedule Id:<span class="text-primary"> {{scheduleId}} </span>
+            </div>
+            <div class="col-md-3">
+                Batch:<span class="text-primary"> {{batch}} </span>
+            </div>
+            <div class="col-md-6">
+                Lecture <span class="text-primary"> {{lectureFrom |date: 'dd-MMM-yyyy hh:mm a'}}</span>
+            </div>
+        </div>
+        <!-- Detail section to display list of students -->
+        <div class="row" >
+            <table class="table tabme-sm table-bordered" *ngIf="addendanceDTOList">
+                <thead>
+                    <th>Name</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rowData of addendanceDTOList" >
+                        <td>{{rowData.name}}</td>
+                        <td><input type="checkbox" [(ngModel)]="rowData.status" ></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <p-footer>
+            <button type="button" class="btn btn-primary" (click)="onSubmit()" >Submit</button>
+        </p-footer>
+    </p-dialog>

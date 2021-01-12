@@ -6,6 +6,7 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CalendarModule } from 'primeng/calendar';
     RippleModule,
     ToastModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    DialogModule
   ]
 })
 export class PrimeNGModulesModule { }

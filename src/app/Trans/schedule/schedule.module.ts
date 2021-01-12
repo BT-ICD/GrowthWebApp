@@ -9,11 +9,12 @@ import { ScheduleEditComponent } from './add/schedule-edit/schedule-edit.compone
 import { BatchLookupResolverService } from 'src/app/Core/services/batch-lookup-resolver.service';
 import { SubjectLookupResolverService } from 'src/app/Core/services/subject-lookup-resolver.service';
 import { ScheduleResolveService } from './schedule-resolve.service';
+import { ScheduleAttendanceComponent } from './schedule-attendance/schedule-attendance.component';
 
 
 
 @NgModule({
-  declarations: [ScheduleListComponent, ScheduleAddComponent, ScheduleEditComponent],
+  declarations: [ScheduleListComponent, ScheduleAddComponent, ScheduleEditComponent, ScheduleAttendanceComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([

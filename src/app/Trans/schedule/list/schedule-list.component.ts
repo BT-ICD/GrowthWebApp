@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
-import { IScheduleList, IScheduleListResolver } from '../../ischedule-types';
+import { IAttendanceDTOSubmit, IScheduleAddendanceDTOList, IScheduleList, IScheduleListResolver } from '../../ischedule-types';
+import { ScheduleAttendanceComponent } from '../schedule-attendance/schedule-attendance.component';
 import { ScheduleDataService } from '../schedule-data.service';
 
 @Component({
@@ -23,6 +24,9 @@ export class ScheduleListComponent implements OnInit {
   selectedSchedule:IScheduleList;
   errorMessage:String;
   cols:any[];
+  displayAttendance:boolean = false;
+  @ViewChild(ScheduleAttendanceComponent) scheduleAttendanceRef:ScheduleAttendanceComponent;
+
   constructor(private route:ActivatedRoute, private router:Router, private dataConstantsService:DataConstantsService, private scheduleDataService : ScheduleDataService, private messageService:MessageService) { 
     this.route.data.subscribe((data)=>{
       this.scheduleListResolver = data['resolveData'];
@@ -75,4 +79,40 @@ export class ScheduleListComponent implements OnInit {
     }
 
   }
+  //Open dialog to submit attendance
+  openAttendance(schedule:IScheduleList):void{
+    let attendanceList: IScheduleAddendanceDTOList[];
+   
+    this.scheduleDataService.attendanceGetList(schedule.scheduleId).subscribe((data)=>{
+      attendanceList= data;
+      if(attendanceList?.length>0){
+        this.displayAttendance=true;
+        this.scheduleAttendanceRef.addendanceDTOList= attendanceList;
+        this.scheduleAttendanceRef.scheduleId =schedule.scheduleId;
+        this.scheduleAttendanceRef.batch = schedule.batch;
+        this.scheduleAttendanceRef.lectureFrom = schedule.lectureFrom;
+      }
+      else{
+        alert('no records available');
+      }
+    })
+    
+  }
+  //When Dialog for Attendance open
+  onDialogShow ():void{
+
+  }
+  //when Dialog for attendance close
+  onDialogHide():void{
+    this.displayAttendance = false;
+  }
+  //When Dialog for attendance submit
+  onDialogSubmit(valueToSubmit:IAttendanceDTOSubmit) :void{
+    this.scheduleDataService.submitAttendance(valueToSubmit).subscribe((data)=>{
+      this.displayAttendance = false;
+    })
+  }
+
+
+
 }

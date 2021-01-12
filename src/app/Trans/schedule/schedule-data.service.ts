@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
-import { IDeleteResponse } from 'src/app/Core/types/common-types';
-import { IScheduleAdd, IScheduleDetail, IScheduleEdit, IScheduleList } from '../ischedule-types';
+import { IDeleteResponse, IRecordsAffectedResponse } from 'src/app/Core/types/common-types';
+import { IAttendanceDTOSubmit, IScheduleAdd, IScheduleAddendanceDTOList, IScheduleDetail, IScheduleEdit, IScheduleList } from '../ischedule-types';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,15 @@ edit(dtoEdit:IScheduleEdit):Observable<IScheduleDetail>{
 delete(scheduleId:number):Observable<IDeleteResponse>{
   const url:string = this.dataConstantsService.BASEAPIURL + 'schedule/delete/' + scheduleId;
   return this.http.post<IDeleteResponse> (url,null);
+}
+//To get list of students to fill attendance for particualar schedule
+attendanceGetList(scheduleId :number):Observable<IScheduleAddendanceDTOList[]>{
+  const url:string = this.dataConstantsService.BASEAPIURL +'attendance/GetList/' + scheduleId;
+  return this.http.get<IScheduleAddendanceDTOList[]>(url);
+}
+//To submit attendance of students for particular schedule
+submitAttendance(dTOSubmit: IAttendanceDTOSubmit):Observable<IRecordsAffectedResponse>{
+  const url:string = this.dataConstantsService.BASEAPIURL + 'attendance/Submit';
+  return this.http.post<IRecordsAffectedResponse>(url,dTOSubmit);
 }
 }
