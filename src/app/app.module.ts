@@ -86,6 +86,7 @@ import {MenuService} from './app.menu.service';
 import { SubjectModule } from './Master/Subject/subject.module';
 import { ChapterModule } from './Master/chapter/chapter.module';
 import { ScheduleModule } from './Trans/schedule/schedule.module';
+import { UserLoginModule } from './user-login/user-login.module';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { ScheduleModule } from './Trans/schedule/schedule.module';
         SubjectModule,
         ChapterModule,
         ScheduleModule,
-        AppRoutingModule
+        AppRoutingModule,
+        UserLoginModule
         
   ],
   providers: [{provide:MenuService}],
