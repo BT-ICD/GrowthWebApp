@@ -10,6 +10,7 @@ import { BatchLookupResolverService } from 'src/app/Core/services/batch-lookup-r
 import { SubjectLookupResolverService } from 'src/app/Core/services/subject-lookup-resolver.service';
 import { ScheduleResolveService } from './schedule-resolve.service';
 import { ScheduleAttendanceComponent } from './schedule-attendance/schedule-attendance.component';
+import { AuthGuardGuard } from 'src/app/Core/services/auth/auth-guard.guard';
 
 
 
@@ -21,17 +22,20 @@ import { ScheduleAttendanceComponent } from './schedule-attendance/schedule-atte
       {
         path:'schedule',
         component:ScheduleListComponent,
-        resolve:{resolveData:ScheduleListResolveService}
+        resolve:{resolveData:ScheduleListResolveService},
+        canActivate:[AuthGuardGuard]
       },
       {
         path:'scheduleadd',
         component:ScheduleAddComponent,
-        resolve: {resolveBatchLookup:BatchLookupResolverService, resolveSubjectLookup:SubjectLookupResolverService}
+        resolve: {resolveBatchLookup:BatchLookupResolverService, resolveSubjectLookup:SubjectLookupResolverService},
+        canActivate:[AuthGuardGuard]
       },
       {
         path:'scheduleedit/:id',
         component:ScheduleEditComponent,
-        resolve: {resolveData:ScheduleResolveService, resolveBatchLookup:BatchLookupResolverService, resolveSubjectLookup:SubjectLookupResolverService}
+        resolve: {resolveData:ScheduleResolveService, resolveBatchLookup:BatchLookupResolverService, resolveSubjectLookup:SubjectLookupResolverService},
+        canActivate:[AuthGuardGuard]
       }
     ])
   ]

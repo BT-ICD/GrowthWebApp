@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthDataService } from 'src/app/Core/services/auth/auth-data.service';
 import { UserLoginDataService } from '../user-login-data.service';
 import { ILoginModel, ITokenModel } from '../user-login-types';
 
@@ -12,8 +13,8 @@ import { ILoginModel, ITokenModel } from '../user-login-types';
 export class AppLoginComponent implements OnInit {
   loginForm:FormGroup;
   errorMessage:string;
-  
-  constructor(private router:Router, private userLoginDataService:UserLoginDataService, private fb:FormBuilder) { }
+  displayLoader:boolean;
+  constructor(private router:Router, private userLoginDataService:UserLoginDataService, private fb:FormBuilder, private authDataService:AuthDataService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -28,15 +29,20 @@ export class AppLoginComponent implements OnInit {
     if(this.loginForm.valid){
       let loginModel:ILoginModel;
       loginModel = Object.assign(this.loginForm.value);
+      this.displayLoader=true;
       this.userLoginDataService.authenticateUser(loginModel).subscribe({
         next:(data)=>this.onLoginSuccess(data),
         error:(err)=>this.onLoginError(err)
       });
+      this.displayLoader=false;
     }
   }
   onLoginSuccess(userToken:ITokenModel){
     this.errorMessage='';
     console.log(userToken);
+    this.authDataService.userToken = userToken;
+    this.router.navigate(['/schedule']);
+
   }
   onLoginError(err){
     if(err.status==401){
@@ -45,5 +51,6 @@ export class AppLoginComponent implements OnInit {
     else{
       this.errorMessage = err.statusText;
     }
+    this.authDataService.userToken=null;
   }
 }

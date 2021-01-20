@@ -7,11 +7,12 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { CustomSpinnerComponent } from './custom-spinner/custom-spinner.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CustomSpinnerComponent],
   imports: [
     CommonModule
   ],
@@ -19,8 +20,8 @@ import { ToastModule } from 'primeng/toast';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    PrimeNGModulesModule
- 
+    PrimeNGModulesModule,
+    CustomSpinnerComponent
   ]
 })
 export class SharedModule { }
