@@ -1,27 +1,57 @@
 import {Component, OnInit } from '@angular/core';
+import { AppComponent } from './app.component';
+import { AuthDataService } from './Core/services/auth/auth-data.service';
 
 @Component({
     selector: 'app-menu',
     template: `
         <div class="menu">
-            <ul class="layout-menu">
-                <li app-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
-            </ul>
+            <ng-container *ngIf="this.authDataService.isAuthenticated; then loggedIn; else guest">
+            </ng-container>
+
+            <ng-template #loggedIn>
+                    <div [ngSwitch]="this.authDataService?.userRole">
+                        <div *ngSwitchCase="'Manager'">
+                            <ul class="layout-menu" >
+                                <li app-menuitem *ngFor="let item of modelManager; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+                            </ul>
+                        </div>
+                        <div *ngSwitchCase="'Student'">
+                            <ul class="layout-menu" >
+                                <li app-menuitem *ngFor="let item of modelStudent; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+                            </ul>
+                        </div>
+                        <div *ngSwitchDefault>
+                            <ul class="layout-menu"  >
+                                <li app-menuitem *ngFor="let item of modelGuest; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+                            </ul>
+                        </div>
+                    </div>
+            </ng-template>
+            <ng-template #guest>
+                 <ul class="layout-menu"  >
+                    <li app-menuitem *ngFor="let item of modelGuest; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+                </ul>
+            </ng-template>
+         
         </div>
     `
 })
 export class AppMenuComponent implements OnInit {
-
-    model: any[];
-
+    constructor( public authDataService:AuthDataService){}
+    private modelManager: any[];
+    private modelStudent: any[];
+    private modelGuest:any[];
+    isAuthenticated:boolean = this.authDataService.isAuthenticated;
+    
     ngOnInit() {
-        this.model = [
+        this.modelManager = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
             {
-                label: 'Master', icon: 'pi pi-fw pi-star', 
+                label: 'Master', icon: 'pi pi-fw', 
                 items: [
                     {label: 'Subject', icon: 'pi pi-fw pi-id-card', routerLink: ['/subject']},
-                    {label: 'Schedule', icon: 'pi pi-fw pi-check-square', routerLink: ['/schedule']}
+                    
                 ]
             },
             {
@@ -32,5 +62,31 @@ export class AppMenuComponent implements OnInit {
                 ]
             }
         ];
+        this.modelStudent = [
+            {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
+            {
+                label: 'Session', icon: '', 
+                items: [
+                    {label: 'My Sessions', icon: 'pi pi-fw pi-id-card', routerLink: ['/myschedule']}
+                 
+                ]
+            }
+            
+        ];
+
+        this.modelGuest= [
+            {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
+            {
+                // label: 'Welcome', icon: '', 
+                // items: [
+                //     //{label: 'Home', icon: '', routerLink: ['/']}
+                 
+                // ]
+            }
+            
+        ];
+       
+        
     }
+  
 }

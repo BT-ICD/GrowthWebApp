@@ -10,6 +10,8 @@ export class AuthDataService {
 //to determine user is authenticated or not
 isAuthenticated:boolean;
   private _userName: string;
+  private _userRole: string;
+  
   
 
 
@@ -25,11 +27,14 @@ isAuthenticated:boolean;
     if(value!=null){
       //todo - to validate token - with role and other parameter
       this.isAuthenticated = true;
+      this.userRole= value.role;
+      console.log(this.userRole);
       sessionStorage.setItem('tokenObj',JSON.stringify(value));
     }
     else
     {
       this.isAuthenticated = false;
+      this.userRole='';
       sessionStorage.removeItem('tokenObj');
     }
   }
@@ -39,5 +44,10 @@ isAuthenticated:boolean;
   public set userName(value: string) {
     this._userName = value;
   }
-  
+  public get userRole(): string {
+    return this._userRole;
+  }
+  public set userRole(value: string) {
+    this._userRole = value;
+  }
 }

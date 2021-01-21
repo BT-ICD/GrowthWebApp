@@ -14,6 +14,7 @@ export class AppLoginComponent implements OnInit {
   loginForm:FormGroup;
   errorMessage:string;
   displayLoader:boolean;
+  loginModel:ILoginModel;
   constructor(private router:Router, private userLoginDataService:UserLoginDataService, private fb:FormBuilder, private authDataService:AuthDataService) { }
 
   ngOnInit(): void {
@@ -27,10 +28,10 @@ export class AppLoginComponent implements OnInit {
   }
   onSubmit():void{
     if(this.loginForm.valid){
-      let loginModel:ILoginModel;
-      loginModel = Object.assign(this.loginForm.value);
+      
+      this.loginModel = Object.assign(this.loginForm.value);
       this.displayLoader=true;
-      this.userLoginDataService.authenticateUser(loginModel).subscribe({
+      this.userLoginDataService.authenticateUser(this.loginModel).subscribe({
         next:(data)=>this.onLoginSuccess(data),
         error:(err)=>this.onLoginError(err)
       });
@@ -41,7 +42,8 @@ export class AppLoginComponent implements OnInit {
     this.errorMessage='';
     console.log(userToken);
     this.authDataService.userToken = userToken;
-    this.router.navigate(['/schedule']);
+    this.authDataService.userName=this.loginModel.userName;
+    this.router.navigate(['/']);
 
   }
   onLoginError(err){
@@ -52,5 +54,6 @@ export class AppLoginComponent implements OnInit {
       this.errorMessage = err.statusText;
     }
     this.authDataService.userToken=null;
+    this.authDataService.userName='';
   }
 }

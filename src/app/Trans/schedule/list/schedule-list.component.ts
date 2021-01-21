@@ -57,6 +57,7 @@ export class ScheduleListComponent implements OnInit {
   editRecord():void{
     if(!this.selectedSchedule){
       alert('Please select particualr schedule and try again');
+      return;
     }
     this.router.navigate(['/scheduleedit',this.selectedSchedule.scheduleId]);
   }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import {FormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 ///Prime NG
@@ -87,6 +87,8 @@ import { SubjectModule } from './Master/Subject/subject.module';
 import { ChapterModule } from './Master/chapter/chapter.module';
 import { ScheduleModule } from './Trans/schedule/schedule.module';
 import { UserLoginModule } from './user-login/user-login.module';
+import { TokenInterceptorService } from './Core/services/interceptors/token-interceptor.service';
+import { StuScheduleModule } from './studentRole/stu-schedule/stu-schedule.module';
 
 @NgModule({
   declarations: [
@@ -110,11 +112,12 @@ import { UserLoginModule } from './user-login/user-login.module';
         SubjectModule,
         ChapterModule,
         ScheduleModule,
-        AppRoutingModule,
-        UserLoginModule
+        UserLoginModule,
+        StuScheduleModule,
+        AppRoutingModule
         
   ],
-  providers: [{provide:MenuService}],
+  providers: [{provide:MenuService},{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

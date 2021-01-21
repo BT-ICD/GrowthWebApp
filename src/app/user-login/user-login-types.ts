@@ -9,5 +9,5 @@ export interface ILoginModel{
 export interface ITokenModel{
     token:string,
     expiration:Date,
-    roles:string
+    role:string
 }
