@@ -27,7 +27,10 @@ export class ScheduleListComponent implements OnInit {
   displayAttendance:boolean = false;
   @ViewChild(ScheduleAttendanceComponent) scheduleAttendanceRef:ScheduleAttendanceComponent;
 
-  constructor(private route:ActivatedRoute, private router:Router, private dataConstantsService:DataConstantsService, private scheduleDataService : ScheduleDataService, private messageService:MessageService) { 
+  constructor(private route:ActivatedRoute, private router:Router, private dataConstantsService:DataConstantsService, private scheduleDataService : ScheduleDataService, private messageService:MessageService) {}
+  
+
+  ngOnInit(): void {
     this.route.data.subscribe((data)=>{
       this.scheduleListResolver = data['resolveData'];
       this.onScheduleListRetrieved(this.scheduleListResolver.scheduleList);
@@ -36,6 +39,9 @@ export class ScheduleListComponent implements OnInit {
       }
       this.defineColumnsForList();
     })
+  }
+  onScheduleListRetrieved(data:IScheduleList[]):void{
+    this.scheduleList= data;
   }
   defineColumnsForList():void{
     this.cols =[
@@ -47,12 +53,6 @@ export class ScheduleListComponent implements OnInit {
       {field:'lectureFrom',header:'From', width:'20%'}
 
     ]
-  }
-  onScheduleListRetrieved(data:IScheduleList[]):void{
-    this.scheduleList= data;
-  }
-
-  ngOnInit(): void {
   }
   editRecord():void{
     if(!this.selectedSchedule){

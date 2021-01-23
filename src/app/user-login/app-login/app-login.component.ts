@@ -40,7 +40,6 @@ export class AppLoginComponent implements OnInit {
   }
   onLoginSuccess(userToken:ITokenModel){
     this.errorMessage='';
-    console.log(userToken);
     this.authDataService.userToken = userToken;
     this.authDataService.userName=this.loginModel.userName;
     this.router.navigate(['/']);
