@@ -7,6 +7,8 @@ import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
+import { CheckboxModule } from 'primeng/checkbox';
+import { PanelModule } from 'primeng/panel';
 
 
 @NgModule({
@@ -22,7 +24,10 @@ import { DialogModule } from 'primeng/dialog';
     ToastModule,
     DropdownModule,
     CalendarModule,
-    DialogModule
+    DialogModule,
+    CheckboxModule,
+    PanelModule
+
   ]
 })
 export class PrimeNGModulesModule { }

@@ -63,7 +63,7 @@ export class AppMenuComponent implements OnInit {
             }
         ];
         this.modelStudent = [
-            {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
+            {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/stuboard']},
             {
                 label: 'Session', icon: '', 
                 items: [

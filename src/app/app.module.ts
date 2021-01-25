@@ -89,6 +89,7 @@ import { ScheduleModule } from './Trans/schedule/schedule.module';
 import { UserLoginModule } from './user-login/user-login.module';
 import { TokenInterceptorService } from './Core/services/interceptors/token-interceptor.service';
 import { StuScheduleModule } from './studentRole/stu-schedule/stu-schedule.module';
+import { StuDashboardModule } from './StudentRole/stu-dashboard/stu-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { StuScheduleModule } from './studentRole/stu-schedule/stu-schedule.modul
         ScheduleModule,
         UserLoginModule,
         StuScheduleModule,
+        StuDashboardModule,
         AppRoutingModule
         
   ],

@@ -1,0 +1,64 @@
+<div class="dashboard p-grid p-fluid">
+    <div class="p-col-12 p-md-4">
+        <div class="card clearfix summary">
+            <span class="title">Sessions</span>
+            <span class="detail">Total number of sessions</span>
+            <span class="count visitors">{{totalSessions}}</span>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="card clearfix summary">
+            <span class="title">Attended</span>
+            <span class="detail">Attended sessions</span>
+            <span class="count purchases">{{attended}}</span>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="card clearfix summary">
+            <span class="title">Missed</span>
+            <span class="detail">Missed sessions</span>
+            <span class="count revenue">{{missed}}</span>
+        </div>
+    </div>
+
+    <div class="p-col-12 p-md-6 p-lg-4">
+        <p-panel header="Tasks" [style]="{'height':'100%'}">
+            <ul class="task-list">
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Sales reports</span>
+                    <button type="button" pButton icon="pi pi-check"></button>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Pay the invoices</span>
+                    <button type="button" pButton icon="pi pi-check"></button>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Dinner with Tony</span>
+                    <button type="button" pButton icon="pi pi-check"></button>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Team meeting</span>
+                    <button type="button" pButton icon="pi pi-check"></button>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Plan the new theme</span>
+                    <button type="button" pButton icon="pi pi-check"></button>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Client meeting</span>
+                    <button type="button" pButton icon="pi pi-check"></button>
+                </li>
+            </ul>
+        </p-panel>
+    </div>
+
+  
+
+   
+</div>
