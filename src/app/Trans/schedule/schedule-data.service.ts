@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
 import { IDeleteResponse, IRecordsAffectedResponse } from 'src/app/Core/types/common-types';
-import { IAttendanceDTOSubmit, IScheduleAdd, IScheduleAddendanceDTOList, IScheduleDetail, IScheduleEdit, IScheduleList } from '../ischedule-types';
+import { IAttendanceDTOSubmit, IScheduleAdd, IScheduleAddendanceDTOList, IScheduleDetail, IScheduleEdit, IScheduleList } from './ischedule-types';
 
 @Injectable({
   providedIn: 'root'

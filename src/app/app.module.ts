@@ -90,6 +90,7 @@ import { UserLoginModule } from './user-login/user-login.module';
 import { TokenInterceptorService } from './Core/services/interceptors/token-interceptor.service';
 import { StuScheduleModule } from './studentRole/stu-schedule/stu-schedule.module';
 import { StuDashboardModule } from './StudentRole/stu-dashboard/stu-dashboard.module';
+import { AssignmentModule } from './Trans/assignment/assignment.module';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,9 @@ import { StuDashboardModule } from './StudentRole/stu-dashboard/stu-dashboard.mo
         UserLoginModule,
         StuScheduleModule,
         StuDashboardModule,
+        AssignmentModule,
         AppRoutingModule
+        
         
   ],
   providers: [{provide:MenuService},{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],

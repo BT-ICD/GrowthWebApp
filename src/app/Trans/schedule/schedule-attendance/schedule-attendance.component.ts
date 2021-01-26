@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-import { IAttendanceDTOSubmit, IScheduleAddendanceDTOList } from '../../ischedule-types';
+import { IAttendanceDTOSubmit, IScheduleAddendanceDTOList } from '../ischedule-types';
 
 @Component({
   selector: 'app-schedule-attendance',

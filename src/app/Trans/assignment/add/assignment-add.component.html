@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="p-card">
+        <!-- Header Row -->
+            <div class="row">
+                <div class="col-md-4">
+                  <h5 class="mt-2">Assignment</h5>
+                </div>
+            </div>
+        <!-- Form Controls Row -->
+        <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+            <div class="p-card mt-2">
+                    <!-- Question Title -->
+                    <div class="row mt-1" >
+                        <label for="queTitle" class="col-md-2" >Title</label>
+                        <div class="col-md-8">
+                            <input id="queTitle" class="col-md-4" name="queTitle" type="text" formControlName="queTitle"  role="textbox"  pInputText 
+                                [ngClass]="{'is-invalid':((assignmentForm.get('queTitle').touched ||assignmentForm.get('queTitle').dirty) &&
+                                    !assignmentForm.get('queTitle').valid)
+
+                                }"
+                            ><small class="text-danger">*</small>
+                            <span class="invalid-feedback">
+                                <span *ngIf="assignmentForm.get('queTitle').errors?.required">
+                                    Title is required
+                                </span>
+                            </span>
+                        </div>   
+                    </div>
+                    <!-- Description -->
+                    <div class="row mt-1">
+                        <label for="queHtml" class="col-md-2" >Description</label>
+                    </div>
+                    <!-- HTML Editor -->
+                    <div class="row mt-1">
+                        <div class="col-md-12">
+                            <!-- <input id="queHtml" class="col-md-4" name="queHtml" type="text" formControlName="queHtml" role="textbox" pInputText> -->
+                            <p-editor formControlName="queHtml" [style]="{'height':'320px'}"></p-editor>
+                        </div>
+                    </div>
+
+                    <!--  Notes -->
+                    <div class="row mt-1">
+                        <label for="notes" class="col-md-2" >Notes</label>
+                        <div class="col-md-8">
+                            <textarea id="notes" class="col-md-4" name="notes" type="text" formControlName="notes"  rows="4"></textarea>
+                        </div>
+                    </div>
+                    
+            </div>
+            <!-- Action Buttons -->
+            <div class="p-card mt-2">
+                <div class="col-md-4 offset-md-2">
+                        <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
+                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/assignment']" pButton></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- To display error -->
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+</div>

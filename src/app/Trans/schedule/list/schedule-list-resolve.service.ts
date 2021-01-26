@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import {Observable, of} from 'rxjs';
 import {catchError, map } from 'rxjs/operators';
 
-import { IScheduleListResolver } from '../../ischedule-types';
+import { IScheduleListResolver } from '../ischedule-types';
 import { ScheduleDataService } from '../schedule-data.service';
 
 @Injectable({

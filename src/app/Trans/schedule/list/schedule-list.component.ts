@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
-import { IAttendanceDTOSubmit, IScheduleAddendanceDTOList, IScheduleList, IScheduleListResolver } from '../../ischedule-types';
+import { IAttendanceDTOSubmit, IScheduleAddendanceDTOList, IScheduleList, IScheduleListResolver } from '../ischedule-types';
 import { ScheduleAttendanceComponent } from '../schedule-attendance/schedule-attendance.component';
 import { ScheduleDataService } from '../schedule-data.service';
 

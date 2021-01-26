@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IBatchLookup, ISubjectLookup } from 'src/app/Core/types/common-types';
-import { IScheduleAdd } from 'src/app/Trans/ischedule-types';
+import { IScheduleAdd } from 'src/app/Trans/schedule/ischedule-types';
 import { ScheduleDataService } from '../../schedule-data.service';
 
 @Component({
