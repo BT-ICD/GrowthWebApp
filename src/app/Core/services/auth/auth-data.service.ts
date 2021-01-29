@@ -28,7 +28,6 @@ isAuthenticated:boolean;
       //todo - to validate token - with role and other parameter
       this.isAuthenticated = true;
       this.userRole= value.role;
-      console.log(this.userRole);
       sessionStorage.setItem('tokenObj',JSON.stringify(value));
     }
     else

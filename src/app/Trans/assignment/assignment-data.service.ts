@@ -20,7 +20,7 @@ export class AssignmentDataService {
     return this.http.get<IAssignmentDTODetail>(url);
   }
   addnew(dtoAdd:IAssignmentDTOAdd):Observable<IAssignmentDTODetail>{
-    const url:string = this.dataConstantsService.BASEAPIURL + 'Assignment/add';
+    const url:string = this.dataConstantsService.BASEAPIURL + 'Assignment/Add';
     return this.http.post<IAssignmentDTODetail>(url,dtoAdd);
   }
   edit(dtoEdit:IAssignmentDTOEdit):Observable<IAssignmentDTODetail>{
