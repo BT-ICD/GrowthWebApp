@@ -9,6 +9,15 @@
         <!-- Form Controls Row -->
         <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
             <div class="p-card mt-2">
+                    <!-- Subject -->
+                    <div class="row mt-1">
+                        <label for="subjectId" class="col-md-2" >Subject</label>
+                        <div class="col-md-8">
+                            <p-dropdown  id="subjectId" [options]="subjectLookup"  formControlName="subjectId" optionLabel="name" optionValue="subjectId"
+                                required="true" datakey="subjectId"  placeholder="Select Subject"
+                            ></p-dropdown>
+                        </div>
+                    </div>
                     <!-- Question Title -->
                     <div class="row mt-1" >
                         <label for="queTitle" class="col-md-2" >Title</label>
@@ -34,7 +43,7 @@
                     <div class="row mt-1">
                         <div class="col-md-12">
                             <!-- <input id="queHtml" class="col-md-4" name="queHtml" type="text" formControlName="queHtml" role="textbox" pInputText> -->
-                            <p-editor formControlName="queHtml" [style]="{'height':'320px'}"></p-editor>
+                            <p-editor formControlName="queHtml" [style]="{'height':'280px'}"></p-editor>
                         </div>
                     </div>
 

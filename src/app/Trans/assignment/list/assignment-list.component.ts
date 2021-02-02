@@ -36,8 +36,8 @@ export class AssignmentListComponent implements OnInit, OnDestroy {
   initializeColumns():void{
     this.cols=[
       {field:'assignmentId',header:'Id', width:'07%'},
-      {field:'queTitle',header:'Description'}
-      
+      {field:'queTitle',header:'Description',width:'50%'},
+      {field:'subjectName',header:'Subject', width:'30%'}
     ];
   }
   editRecord():void{

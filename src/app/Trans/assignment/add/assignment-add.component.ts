@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ISubjectLookup, ISubjectLookupResolver } from 'src/app/Core/types/common-types';
 import { AssignmentDataService } from '../assignment-data.service';
 import { IAssignmentDTOAdd } from '../assignment-types';
 
@@ -15,13 +16,28 @@ export class AssignmentAddComponent implements OnInit, OnDestroy {
 assignmentForm:FormGroup;
 errorMessage:string;
 addNewSub:Subscription;
-  constructor(private router:Router, private fb:FormBuilder, private assignmentDataService:AssignmentDataService ) { }
+subjectLookup:ISubjectLookup[];
+subjectListResolve:ISubjectLookupResolver;
+  constructor(private router:Router, private route:ActivatedRoute, private fb:FormBuilder, private assignmentDataService:AssignmentDataService ) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe((data)=>{
+      this.subjectListResolve = data['resolveSubjectList'];
+      this.subjectLookup= this.subjectListResolve.subjects;
+      if(this.subjectListResolve.error){
+        this.errorMessage = this.subjectListResolve.error;
+      }
+      
+    })
+    this.initializeForm();
+  }
+  
+  initializeForm():void{
     this.assignmentForm = this.fb.group({
       queTitle:['',Validators.required],
       queHtml:[''],
-      notes:['']
+      notes:[''],
+      subjectId:[null,Validators.required]
     });
   }
   onSubmit():void{

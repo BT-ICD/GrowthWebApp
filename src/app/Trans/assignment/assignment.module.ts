@@ -9,6 +9,7 @@ import { AssignmentListComponent } from './list/assignment-list.component';
 import { AssignmentAddComponent } from './add/assignment-add.component';
 import { AssignmentEditComponent } from './edit/assignment-edit.component';
 import { AssignmentResolveService } from './assignment-resolve.service';
+import { SubjectLookupResolverService } from 'src/app/Core/services/subject-lookup-resolver.service';
 
 
 
@@ -26,12 +27,13 @@ import { AssignmentResolveService } from './assignment-resolve.service';
       },
       {
         path:'assignmentadd',
-        component:AssignmentAddComponent
+        component:AssignmentAddComponent,
+        resolve:{resolveSubjectList:SubjectLookupResolverService}
       },
       {
         path:'assignmentedit/:id',
         component:AssignmentEditComponent,
-        resolve:{resolveData:AssignmentResolveService}
+        resolve:{resolveData:AssignmentResolveService, resolveSubjectList:SubjectLookupResolverService}
       }
 
     ])
