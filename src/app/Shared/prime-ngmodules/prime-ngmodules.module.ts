@@ -9,7 +9,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
-
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -26,8 +26,8 @@ import { PanelModule } from 'primeng/panel';
     CalendarModule,
     DialogModule,
     CheckboxModule,
-    PanelModule
-
+    PanelModule,
+    FileUploadModule
   ]
 })
 export class PrimeNGModulesModule { }

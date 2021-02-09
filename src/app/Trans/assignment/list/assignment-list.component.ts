@@ -4,7 +4,7 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
 import { AssignmentDataService } from '../assignment-data.service';
-import { IAssignmentDTOList, IAssignmentListResolver } from '../assignment-types';
+import { IAssignmentDTODetail, IAssignmentDTOList, IAssignmentListResolver } from '../assignment-types';
 
 @Component({
   selector: 'app-assignment-list',
@@ -67,6 +67,9 @@ export class AssignmentListComponent implements OnInit, OnDestroy {
     if(this.deleteRecSub){
       this.deleteRecSub.unsubscribe();
     }
+  }
+  assignmentDocuments(assignment:IAssignmentDTODetail):void{
+    this.router.navigate(['assignmentdoc',assignment.assignmentId, assignment.queTitle, assignment.subjectName]);
   }
 
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBatchLookup, ISubjectLookup } from '../types/common-types';
+import { IBatchLookup, IDocumentTypeLookup, ISubjectLookup } from '../types/common-types';
 import { DataConstantsService } from './data-constants.service';
 
 @Injectable({
@@ -18,4 +18,9 @@ export class LookupValuesService {
     const url:string = this.dataConstantsService.BASEAPIURL + 'batch/Lookup';
     return this.http.get<IBatchLookup[]>(url);
   }
+  documentTypeLookup():Observable<IDocumentTypeLookup[]>{
+    const url:string = this.dataConstantsService.BASEAPIURL + 'documenttype/Lookup';
+    return this.http.get<IDocumentTypeLookup[]>(url);
+  }
+
 }

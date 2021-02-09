@@ -1,0 +1,50 @@
+        <p-dialog header="Add new document" [(visible)]="display" modal="modal" showEffect="fade" [style]="{width: '600px'}"
+            (onHide)="onHide()" (onShow)="onShow()"
+        >
+            <div class="p-card">
+                    <div class="p-card mt-2">
+                            <div class="row">
+                                {{assignmentId}}
+                            </div>
+                            <!-- Subject -->
+                            <div class="row mt-1">
+                                <label for="documentTypeId" class="col-md-2" >Subject</label>
+                                <div class="col-md-8">
+                                    <p-dropdown  id="documentTypeId" [options]="documentTypeList" optionLabel="name" optionValue="documentTypeId"
+                                        required="true"  datakey="documentTypeId" placeholder="Select Document Type"
+                                        [(ngModel)]="documentTypeId"
+                                    ></p-dropdown>
+                                </div>
+                            </div>
+                           <!-- Notes -->
+                            <div class="row mt-1">
+                                <label for="notes" class="col-md-2" >Notes</label>
+                                <div class="col-md-8">
+                                    <textarea id="notes" class="col-md-6" name="notes" type="text"   rows="5" style="min-width: 100%"
+                                        [(ngModel)]="notes"
+                                    >
+                                    </textarea>
+                                </div>
+                            </div>
+                            <!-- File Upload -->
+                            <div class="row mt-1">
+                                <label for="file" class="col-md-2" >Document</label>
+                                <div class="col-md-8">
+                                    <p-fileUpload #pfUpload mode="basic" name="file" id="file" accept="image/*" maxFileSize="1000000" 
+                                        (onSelect)="onSelect($event)"
+                                        
+                                    >
+                                    </p-fileUpload>
+                                    <button type="button" class="btn btn-secondary mt-2" (click)="clearFileSelection(pfUpload)">Cancel File</button>
+                                </div>
+                            </div>
+                    </div>
+                
+            </div>
+            <p-footer>
+                <button type="button" pButton icon="pi pi-check"  label="Yes"
+                    class="p-button-text" (click)="saveDocument()" ></button>
+                <button type="button" pButton icon="pi pi-times" (click)="cancelDocument()" label="No"
+                    class="p-button-text"></button>
+            </p-footer>
+        </p-dialog>

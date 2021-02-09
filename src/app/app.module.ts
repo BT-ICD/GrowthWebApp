@@ -91,6 +91,7 @@ import { TokenInterceptorService } from './Core/services/interceptors/token-inte
 import { StuScheduleModule } from './studentRole/stu-schedule/stu-schedule.module';
 import { StuDashboardModule } from './StudentRole/stu-dashboard/stu-dashboard.module';
 import { AssignmentModule } from './Trans/assignment/assignment.module';
+import { AssignmentDocumentModule } from './Trans/assignment/assignment-document/assignment-document.module';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,9 @@ import { AssignmentModule } from './Trans/assignment/assignment.module';
         StuScheduleModule,
         StuDashboardModule,
         AssignmentModule,
+        AssignmentDocumentModule,
         AppRoutingModule
+        
         
         
   ],

@@ -22,7 +22,14 @@ export interface IBatchLookupResolver{
     batchList:IBatchLookup[];
     error?:any;
 }
-
+export interface IDocumentTypeLookup{
+    documentTypeId:number,
+    name:string
+}
+export interface IDocumentTypeLookupResolver{
+    documentTypeList:IDocumentTypeLookup[],
+    error?:any;
+}
 //To fill id and value of chapters - for dropdown
 export interface IChapterLookup{
     chapterId:number,
