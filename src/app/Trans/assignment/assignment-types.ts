@@ -37,3 +37,12 @@ export interface IAssignmentResolver{
     assignment:IAssignmentDTOList,
     error?:any
 }
+export interface IAssignmentAllocationDTOAdd{
+    batchId:number;
+    assignmentId:number;
+    studentIds:string;
+}
+export interface IAssignmentAllocationStudents{
+    batchId:number;
+    studentIds:string;
+}

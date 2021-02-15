@@ -10,6 +10,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
 import {FileUploadModule} from 'primeng/fileupload';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     DialogModule,
     CheckboxModule,
     PanelModule,
-    FileUploadModule
+    FileUploadModule,
+    SplitButtonModule
   ]
 })
 export class PrimeNGModulesModule { }

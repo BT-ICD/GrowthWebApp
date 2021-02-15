@@ -8,20 +8,24 @@ import { RippleModule } from 'primeng/ripple';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CustomSpinnerComponent } from './custom-spinner/custom-spinner.component';
+import { BatchWiseStudentListComponent } from './partialcomponents/batch-wise-student-list/batch-wise-student-list.component';
 
 
 
 @NgModule({
-  declarations: [CustomSpinnerComponent],
+  declarations: [CustomSpinnerComponent, BatchWiseStudentListComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    PrimeNGModulesModule
   ],
   exports:[
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     PrimeNGModulesModule,
-    CustomSpinnerComponent
+    CustomSpinnerComponent,
+    BatchWiseStudentListComponent
   ]
 })
 export class SharedModule { }

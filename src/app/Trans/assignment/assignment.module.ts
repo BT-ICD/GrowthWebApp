@@ -10,6 +10,8 @@ import { AssignmentAddComponent } from './add/assignment-add.component';
 import { AssignmentEditComponent } from './edit/assignment-edit.component';
 import { AssignmentResolveService } from './assignment-resolve.service';
 import { SubjectLookupResolverService } from 'src/app/Core/services/subject-lookup-resolver.service';
+import { BatchLookupResolverService } from 'src/app/Core/services/batch-lookup-resolver.service';
+import { StudentLookupResolverService } from 'src/app/Core/services/resolvers/student-lookup-resolver.service';
 
 
 
@@ -23,7 +25,7 @@ import { SubjectLookupResolverService } from 'src/app/Core/services/subject-look
       {
         path:'assignment',
         component:AssignmentListComponent,
-        resolve:{resolveData:AssignmentListResolveService}
+        resolve:{resolveData:AssignmentListResolveService, resolveBatchLookup:BatchLookupResolverService, resolveStudentLookup:StudentLookupResolverService}
       },
       {
         path:'assignmentadd',

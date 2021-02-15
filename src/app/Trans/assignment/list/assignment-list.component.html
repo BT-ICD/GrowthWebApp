@@ -8,18 +8,21 @@
                 </div>
                 <div class="col-md-8 d-flex justify-content-end">
                     <div class="row">
-                    <div class="col">
-                        <p-button icon="pi pi-plus"  label="New" [routerLink]="['/assignmentadd']"  ></p-button>
+                        <div class="col">
+                            <p-button icon="pi pi-plus"  label="New" [routerLink]="['/assignmentadd']"  ></p-button>
+                        </div>
+                        <div class="col">
+                            <p-button label="Edit" icon="pi pi-pencil"  (click)="editRecord()"></p-button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" label="Delete" icon="pi pi-trash" (click)="deleteRecord()" ></button>
+                        </div>
+                        <div class="col ml-4">
+                            <p-splitButton  icon="pi pi-ellipsis-h"  [model]="actionItems"></p-splitButton>
+                        </div>
                     </div>
-                    <div class="col">
-                        <p-button label="Edit" icon="pi pi-pencil"  (click)="editRecord()"></p-button>
-                    </div>
-                    <div class="col">
-                        <button pButton type="button" label="Delete" icon="pi pi-trash" (click)="deleteRecord()" ></button>
-                    </div>
-                    </div>
-                    
                 </div>
+                
             </div>
              <!-- Table - List of Assignments Row -->
        <div class="row mt-1">
@@ -76,3 +79,11 @@
         {{ errorMessage }}
     </div>
 </div>
+<app-batch-wise-student-list [visible]="displayAllocationDialog" [studentLookup]="studentLookup"
+    [batchLookup]="batchLookup"
+    [queTitle]="selectedAssignment?.queTitle"
+(onDialogHide)="onAllocationDialogHide()"
+(onDialogSubmit)="onAllocationDialogSubmit($event)"
+>
+
+</app-batch-wise-student-list>

@@ -1,0 +1,9 @@
+.mydialog {
+    width: '150';
+}
+
+@media screen and (max-width: 40em) {
+    .mydialog {
+        width: 75vw;
+    }
+}

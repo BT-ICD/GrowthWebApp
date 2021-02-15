@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
-import { IDeleteResponse } from 'src/app/Core/types/common-types';
-import { IAssignmentDTOAdd, IAssignmentDTODetail, IAssignmentDTOEdit, IAssignmentDTOList } from './assignment-types';
+import { IDeleteResponse, IRecordsAffectedResponse } from 'src/app/Core/types/common-types';
+import { IAssignmentAllocationDTOAdd, IAssignmentDTOAdd, IAssignmentDTODetail, IAssignmentDTOEdit, IAssignmentDTOList } from './assignment-types';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,10 @@ export class AssignmentDataService {
   delete(assignmentId:number):Observable<IDeleteResponse>{
     const url:string = this.dataConstantsService.BASEAPIURL + 'Assignment/delete/' + assignmentId;
     return this.http.post<IDeleteResponse>(url,null);
+  }
+  allocatedAssignment(data:IAssignmentAllocationDTOAdd){
+    const url:string = this.dataConstantsService.BASEAPIURL + 'AssignmentAllocation/Add';
+    return this.http.post<IRecordsAffectedResponse>(url,data);
+    
   }
 }

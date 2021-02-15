@@ -35,3 +35,15 @@ export interface IChapterLookup{
     chapterId:number,
     name:string
 }
+
+//To fill student list along with batch
+export interface IStudentLookup{
+    studentId:null,
+    name:string,
+    batchId:string,
+    batchCode:string
+}
+export interface IStudentLookupResolver{
+    studentLookup:IStudentLookup[],
+    error?:any
+}
