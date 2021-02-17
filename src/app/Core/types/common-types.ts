@@ -47,3 +47,10 @@ export interface IStudentLookupResolver{
     studentLookup:IStudentLookup[],
     error?:any
 }
+export interface IAssignment{
+    assignmentId:number,
+    queTitle:string,
+    queHtml:string,
+    status:number,
+    allocatedOn:Date
+}

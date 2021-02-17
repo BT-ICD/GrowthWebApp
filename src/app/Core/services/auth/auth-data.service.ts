@@ -11,10 +11,6 @@ export class AuthDataService {
 isAuthenticated:boolean;
   private _userName: string;
   private _userRole: string;
-  
-  
-
-
 
   constructor() { }
   public get userToken(): ITokenModel {

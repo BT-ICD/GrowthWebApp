@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/Shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { StuBoardResolveService } from './stu-board-resolve.service';
 import { AuthGuardGuard } from 'src/app/Core/services/auth/auth-guard.guard';
+import { MyTaskResolveService } from './my-task-resolve.service';
 
 
 
@@ -17,7 +18,7 @@ import { AuthGuardGuard } from 'src/app/Core/services/auth/auth-guard.guard';
       {
         path:'stuboard',
         component:StuBoardComponent,
-        resolve:{resolveData:StuBoardResolveService},
+        resolve:{resolveData:StuBoardResolveService, resolveAssignments:MyTaskResolveService},
         canActivate:[AuthGuardGuard]
       }
     ])

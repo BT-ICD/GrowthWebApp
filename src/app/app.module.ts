@@ -92,6 +92,7 @@ import { StuScheduleModule } from './studentRole/stu-schedule/stu-schedule.modul
 import { StuDashboardModule } from './StudentRole/stu-dashboard/stu-dashboard.module';
 import { AssignmentModule } from './Trans/assignment/assignment.module';
 import { AssignmentDocumentModule } from './Trans/assignment/assignment-document/assignment-document.module';
+import { StuAssignmentsModule } from './studentRole/stu-assignments/stu-assignments.module';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { AssignmentDocumentModule } from './Trans/assignment/assignment-document
         AppConfigComponent,
         AppMenuComponent,
         AppMenuitemComponent
+        
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,9 @@ import { AssignmentDocumentModule } from './Trans/assignment/assignment-document
         StuDashboardModule,
         AssignmentModule,
         AssignmentDocumentModule,
+        StuAssignmentsModule,
         AppRoutingModule
+        
         
         
         

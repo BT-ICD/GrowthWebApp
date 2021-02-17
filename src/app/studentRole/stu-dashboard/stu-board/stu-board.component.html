@@ -24,41 +24,20 @@
     <div class="p-col-12 p-md-6 p-lg-4">
         <p-panel header="Tasks" [style]="{'height':'100%'}">
             <ul class="task-list">
-                <li>
-                    <p-checkbox binary="true"></p-checkbox>
-                    <span class="task-name">Sales reports</span>
-                    <button type="button" pButton icon="pi pi-check"></button>
-                </li>
-                <li>
-                    <p-checkbox binary="true"></p-checkbox>
-                    <span class="task-name">Pay the invoices</span>
-                    <button type="button" pButton icon="pi pi-check"></button>
-                </li>
-                <li>
-                    <p-checkbox binary="true"></p-checkbox>
-                    <span class="task-name">Dinner with Tony</span>
-                    <button type="button" pButton icon="pi pi-check"></button>
-                </li>
-                <li>
-                    <p-checkbox binary="true"></p-checkbox>
-                    <span class="task-name">Team meeting</span>
-                    <button type="button" pButton icon="pi pi-check"></button>
-                </li>
-                <li>
-                    <p-checkbox binary="true"></p-checkbox>
-                    <span class="task-name">Plan the new theme</span>
-                    <button type="button" pButton icon="pi pi-check"></button>
-                </li>
-                <li>
-                    <p-checkbox binary="true"></p-checkbox>
-                    <span class="task-name">Client meeting</span>
-                    <button type="button" pButton icon="pi pi-check"></button>
+                <li *ngFor="let assignment of assignmentList">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <span class="task-name">{{assignment.queTitle}}</span>
+                        </div>
+                        <div class="col-md-1 float-right">
+                            <span (click)="displayAssignmentDetail(assignment)"><i class="fa fa-info-circle text-primary" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </p-panel>
     </div>
-
-  
-
-   
 </div>
+<app-assignment-view [displayDialog]="displayAssignmentDialog" (onDialogHide)="onDialogHide()" (onDialogClose)="onDialogClose()">
+
+</app-assignment-view>

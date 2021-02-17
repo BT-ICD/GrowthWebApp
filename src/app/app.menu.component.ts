@@ -66,9 +66,10 @@ export class AppMenuComponent implements OnInit {
         this.modelStudent = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/stuboard']},
             {
-                label: 'Session', icon: '', 
+                label: "Let's do it", icon: '', 
                 items: [
-                    {label: 'My Sessions', icon: 'pi pi-fw pi-id-card', routerLink: ['/myschedule']}
+                    {label: 'Schedule', icon: 'pi pi-align-justify', routerLink: ['/myschedule']},
+                    {label: 'Assignment', icon: 'pi pi-list', routerLink: ['/myassignments']}
                  
                 ]
             }

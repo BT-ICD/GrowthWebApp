@@ -9,11 +9,12 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CustomSpinnerComponent } from './custom-spinner/custom-spinner.component';
 import { BatchWiseStudentListComponent } from './partialcomponents/batch-wise-student-list/batch-wise-student-list.component';
+import { AssignmentViewComponent } from './partialcomponents/assignment-view/assignment-view.component';
 
 
 
 @NgModule({
-  declarations: [CustomSpinnerComponent, BatchWiseStudentListComponent],
+  declarations: [CustomSpinnerComponent, BatchWiseStudentListComponent, AssignmentViewComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -25,7 +26,8 @@ import { BatchWiseStudentListComponent } from './partialcomponents/batch-wise-st
     ReactiveFormsModule,
     PrimeNGModulesModule,
     CustomSpinnerComponent,
-    BatchWiseStudentListComponent
+    BatchWiseStudentListComponent,
+    AssignmentViewComponent
   ]
 })
 export class SharedModule { }
