@@ -30,7 +30,7 @@
                             <div class="row mt-1">
                                 <label for="file" class="col-md-2" >Document</label>
                                 <div class="col-md-8">
-                                    <p-fileUpload #pfUpload mode="basic" name="file" id="file" accept="image/*" maxFileSize="1000000" 
+                                    <p-fileUpload #pfUpload mode="basic" name="file" id="file" accept="image/*,doc,.docx,.pdf " maxFileSize="1000000" 
                                         (onSelect)="onSelect($event)"
                                         
                                     >
