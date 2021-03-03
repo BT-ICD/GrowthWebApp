@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBatchLookup, IDocumentTypeLookup, IStudentLookup, ISubjectLookup } from '../types/common-types';
+import { IBatchLookup, IDocumentTypeLookup, IQueTypeLookup, IStudentLookup, ISubjectLookup } from '../types/common-types';
 import { DataConstantsService } from './data-constants.service';
 
 @Injectable({
@@ -26,4 +26,10 @@ export class LookupValuesService {
     const url:string = this.dataConstantsService.BASEAPIURL + 'Student/Lookup';
     return this.http.get<IStudentLookup[]>(url);
   }
+  queTypeLookup():Observable<IQueTypeLookup[]>{
+    const url:string = this.dataConstantsService.BASEAPIURL + 'QueType/Lookup';
+    return this.http.get<IQueTypeLookup[]>(url);
+  }
+  
+  
 }

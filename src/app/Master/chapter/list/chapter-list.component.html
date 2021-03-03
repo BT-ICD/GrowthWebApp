@@ -20,8 +20,11 @@
                     <div class="col">
                         <button pButton type="button" label="Delete" icon="pi pi-trash" (click)="deleteRecord()" ></button>
                     </div>
+                    <div class="col ml-4">
+                        <p-splitButton  icon="pi pi-ellipsis-h"  [model]="actionItems"></p-splitButton>
                     </div>
-                    
+                    </div>
+                   
                 </div>
                 <!-- <div class="col-md-2">
                     <div class="d-flex justify-content-end">

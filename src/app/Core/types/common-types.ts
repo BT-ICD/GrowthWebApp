@@ -54,3 +54,11 @@ export interface IAssignment{
     status:number,
     allocatedOn:Date
 }
+export interface IQueTypeLookup{
+    queTypeId:number,
+    questionType:string
+}
+export interface IQueTypeResolver{
+    queTypeLookup:IQueTypeLookup[],
+    error?:any
+}

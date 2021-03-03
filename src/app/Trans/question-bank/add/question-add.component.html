@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="p-card">
+        <!-- Header Row -->
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="mt-2">Question</h5>
+                
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-primary" (click)="addAnswerOptions()">Add New Option</button>
+            </div>
+        </div>
+        <!-- Form Controls Row -->
+        <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+            <div class="p-card mt-2">
+                    <!-- Title Name -->
+                    <div class="row mt-1" >
+                        <label for="name" class="col-md-2" >Title</label>
+                        <div class="col-md-8">
+                            <input id="name" class="col-md-8" name="title" type="text" formControlName="title"  role="textbox"  pInputText 
+                                [ngClass]="{'is-invalid':((questionForm.get('title').touched ||questionForm.get('title').dirty) &&
+                                    !questionForm.get('title').valid)
+
+                                }"
+                            ><small class="text-danger">*</small>
+                            <span class="invalid-feedback">
+                                <span *ngIf="questionForm.get('title').errors?.required">
+                                    Title is required
+                                </span>
+                            </span>
+                        </div>   
+                    </div>
+                    <!-- HTML Text -->
+                    <div class="row mt-1">
+                        <label for="htmlText" class="col-md-2" >Question HTML</label>
+                        <div class="col-md-8">
+                            <textarea id="htmlText" class="col-md-8" name="htmlText" formControlName="htmlText" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <!-- QueType -->
+                    <div class="row mt-1">
+                        <label for="queTypeId" class="col-md-2" >Type</label>
+                        <div class="col-md-8">
+                            <p-dropdown  id="queTypeId" [options]="queTypeLookup"  formControlName="queTypeId" optionLabel="questionType" optionValue="queTypeId"
+                                required="true" datakey="queTypeId"  placeholder="Select Question Type"
+                            ></p-dropdown>
+                        </div>
+                    </div>
+                    <!--  Notes -->
+                    <div class="row mt-1">
+                        <label for="notes" class="col-md-2" >Notes</label>
+                        <div class="col-md-8">
+                            <textarea id="notes" class="col-md-8" name="notes" type="text" formControlName="notes"  rows="1"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- For Answer Options -->
+                    <div  formArrayName="answerOptions" *ngFor="let answerOption of answerOptions.controls; let i=index">
+                        <!-- Answer Option -->
+                        <div class="row  mt-1" [formGroupName]="i">
+                            <label for="name" class="col-md-2" >Answere Option {{i+1}}</label>
+                            <div class="col-md-8">
+                                <textarea id="notes" class="col-md-8" name="notes" type="text" formControlName="htmlText"  rows="3"></textarea>
+                            </div>   
+                        </div>
+                    </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="p-card mt-2">
+                <div class="col-md-4 offset-md-2">
+                        <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
+                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/chapter', chapterId]" pButton></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+</div>

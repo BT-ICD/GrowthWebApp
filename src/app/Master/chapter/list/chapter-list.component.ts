@@ -19,7 +19,7 @@ export class ChapterListComponent implements OnInit {
   subjectName:string;
   subjectId:number;
   cols:any[];
-
+  actionItems:any[];
   public get chapters(): IChapterDTOList[] {
     return this._chapters;
   }
@@ -40,6 +40,8 @@ export class ChapterListComponent implements OnInit {
       this.subjectName = this.chapterListResolver.subjectName;
       this.onChapterListRetrieved(this.chapterListResolver.chapters);
     }));
+
+    this.initializeActionItems();
   }
   defineColumnsForList():void{
     this.cols=[
@@ -60,6 +62,21 @@ export class ChapterListComponent implements OnInit {
     this.router.navigate(['/chapteredit', this.selectedChapter.chapterId],{state:{subjectId:this.subjectId, subjectName:this.subjectName}});
     
   }
+  initializeActionItems():void{
+    this.actionItems = [
+      {label: 'Question Bank', icon: 'pi pi-users', command: () => {
+          this.openQuestionBank();
+      }}
+     
+  ];
+}
+openQuestionBank():void{
+  if(!this.selectedChapter){
+    alert('None record selected. Please select a record and try again!');
+    return ;
+  }
+  this.router.navigate(['questionbank', this.selectedChapter.chapterId,this.selectedChapter.name, this.subjectId, this.subjectName]);
+}
   deleteRecord():void{
     if(!this.selectedChapter){
       alert('None record selected. Please select a record and try again!');

@@ -93,6 +93,7 @@ import { StuDashboardModule } from './StudentRole/stu-dashboard/stu-dashboard.mo
 import { AssignmentModule } from './Trans/assignment/assignment.module';
 import { AssignmentDocumentModule } from './Trans/assignment/assignment-document/assignment-document.module';
 import { StuAssignmentsModule } from './studentRole/stu-assignments/stu-assignments.module';
+import { QuestionBankModule } from './Trans/question-bank/question-bank.module';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,9 @@ import { StuAssignmentsModule } from './studentRole/stu-assignments/stu-assignme
         AssignmentModule,
         AssignmentDocumentModule,
         StuAssignmentsModule,
+        QuestionBankModule,
         AppRoutingModule
+        
         
         
         

@@ -26,7 +26,7 @@ subjectForm:FormGroup;
     })
   }
 onSubmit():void{
-  console.log(this.subjectForm.valid);
+  
   if(this.subjectForm.valid){
     this.subjectAdd = Object.assign(this.subjectForm.value);
     this.subjectDataService.addNew(this.subjectAdd).subscribe((data)=>{
