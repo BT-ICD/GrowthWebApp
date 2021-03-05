@@ -6,9 +6,7 @@
                 <h5 class="mt-2">Question</h5>
                 
             </div>
-            <div class="col-md-2">
-                <button class="btn btn-outline-primary" (click)="addAnswerOptions()">Add New Option</button>
-            </div>
+            
         </div>
         <!-- Form Controls Row -->
         <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
@@ -34,7 +32,17 @@
                     <div class="row mt-1">
                         <label for="htmlText" class="col-md-2" >Question HTML</label>
                         <div class="col-md-8">
-                            <textarea id="htmlText" class="col-md-8" name="htmlText" formControlName="htmlText" rows="10"></textarea>
+                            <textarea id="htmlText" class="col-md-8" name="htmlText" formControlName="htmlText" rows="10"
+                            [ngClass]="{'is-invalid':((questionForm.get('htmlText').touched ||questionForm.get('htmlText').dirty) &&
+                                !questionForm.get('htmlText').valid)
+
+                                }"
+                            ></textarea>
+                            <span class="invalid-feedback">
+                                <span *ngIf="questionForm.get('htmlText').errors?.required">
+                                    Question HTML is required
+                                </span>
+                            </span>
                         </div>
                     </div>
                     <!-- QueType -->
@@ -42,8 +50,17 @@
                         <label for="queTypeId" class="col-md-2" >Type</label>
                         <div class="col-md-8">
                             <p-dropdown  id="queTypeId" [options]="queTypeLookup"  formControlName="queTypeId" optionLabel="questionType" optionValue="queTypeId"
-                                required="true" datakey="queTypeId"  placeholder="Select Question Type"
-                            ></p-dropdown>
+                                datakey="queTypeId"  autoDisplayFirst="false" placeholder="Select Question Type"
+                                
+                                [ngClass]="{'is-invalid':((questionForm.get('queTypeId').touched ||questionForm.get('queTypeId').dirty) &&
+                                !questionForm.get('queTypeId').valid)
+                                }"
+                                ></p-dropdown>
+                                <span class="invalid-feedback">
+                                    <span *ngIf="questionForm.get('queTypeId').errors?.required">
+                                        Question Type is required
+                                    </span>
+                                </span>
                         </div>
                     </div>
                     <!--  Notes -->
@@ -52,15 +69,25 @@
                         <div class="col-md-8">
                             <textarea id="notes" class="col-md-8" name="notes" type="text" formControlName="notes"  rows="1"></textarea>
                         </div>
+                        <button class="btn btn-outline-primary" (click)="addAnswerOptions()">Add New Option</button>
                     </div>
                     
                     <!-- For Answer Options -->
                     <div  formArrayName="answerOptions" *ngFor="let answerOption of answerOptions.controls; let i=index">
                         <!-- Answer Option -->
                         <div class="row  mt-1" [formGroupName]="i">
-                            <label for="name" class="col-md-2" >Answere Option {{i+1}}</label>
+                            <label attr.for="{{'htmlText' + i}}" class="col-md-2" >Option {{i+1}}</label>
                             <div class="col-md-8">
-                                <textarea id="notes" class="col-md-8" name="notes" type="text" formControlName="htmlText"  rows="3"></textarea>
+                                <textarea id="{{'htmlText' + i}}" class="col-md-8" name="htmlText" type="text" formControlName="htmlText"  rows="3" 
+                                [ngClass]="{'is-invalid':((answerOptions.controls[i].get('htmlText').touched ||answerOptions.controls[i].get('htmlText').dirty) &&
+                                !answerOptions.controls[i].get('htmlText').valid)
+                                }"
+                                ></textarea>
+                                <span class="invalid-feedback">
+                                    <span *ngIf="answerOptions.controls[i].get('htmlText').errors?.required">
+                                        Answer is required
+                                    </span>
+                                </span>
                             </div>   
                         </div>
                     </div>
@@ -69,7 +96,7 @@
             <div class="p-card mt-2">
                 <div class="col-md-4 offset-md-2">
                         <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
-                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/chapter', chapterId]" pButton></button>
+                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/questionbank', chapterId, chapterName, subjectId, subjectName]" pButton></button>
                 </div>
             </div>
         </form>

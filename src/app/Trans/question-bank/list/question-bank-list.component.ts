@@ -56,7 +56,7 @@ constructor( private route:ActivatedRoute, private router:Router, private messag
     this.questions  = data;
   }
   questionAdd():void{
-    this.router.navigate(['/questionbankadd', this.chapterId]);
+    this.router.navigate(['/questionbankadd', this.chapterId, this.chapterName, this.subjectId, this.subjectName]);
   }
   deleteRecord():void{
 

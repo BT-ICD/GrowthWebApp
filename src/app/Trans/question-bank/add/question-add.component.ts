@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+/**
+ * Learning reference for Validation in HTML for FormArray element 
+ * https://www.concretepage.com/angular/angular-formarray-validation
+ */
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IQueTypeLookup, IQueTypeResolver } from 'src/app/Core/types/common-types';
 import { IQuestionDTOAdd } from '../iquestion-bank-types';
 import { QuestionBankDataService } from '../question-bank-data.service';
@@ -10,36 +15,28 @@ import { QuestionBankDataService } from '../question-bank-data.service';
   templateUrl: './question-add.component.html',
   styleUrls: ['./question-add.component.scss']
 })
-export class QuestionAddComponent implements OnInit {
+export class QuestionAddComponent implements OnInit , OnDestroy{
   questionForm:FormGroup;
   queTypeLookup:IQueTypeLookup[];
   chapterId:number;
   chapterName:string;
+  subjectId:number;
+  subjectName:string;
   queTypeResolver:IQueTypeResolver;
   errorMessage:string;
+  routeDataSub:Subscription;
+  dataUpdateSub:Subscription
   constructor(private route:ActivatedRoute, private fb:FormBuilder, private router:Router, private questionBankDataService:QuestionBankDataService) { }
+ 
 
   ngOnInit(): void {
     this.loadData();
     this.initializeForm();
     
   }
-  onSubmit():void{
-    console.log(this.questionForm.valid);
-    console.log(this.questionForm.value);
-    let dtoAdd:IQuestionDTOAdd = Object.assign(this.questionForm.value);
-    console.log(dtoAdd);
-    if(this.questionForm.valid){
-      this.questionBankDataService.add(dtoAdd).subscribe((data)=>{
-       if(data.recordsAffected>0){
-         alert('Question Created');
-         this.questionForm.reset();
-       }
-      })
-    }
-  }
+ 
   loadData():void{
-    this.route.data.subscribe((data)=>{
+    this.routeDataSub= this.route.data.subscribe((data)=>{
       this.queTypeResolver= data['resolveData'];
       this.queTypeLookup = this.queTypeResolver.queTypeLookup;
       if(this.queTypeResolver.error){
@@ -49,6 +46,10 @@ export class QuestionAddComponent implements OnInit {
     //To initialize chapterId from query string
     this.route.paramMap.subscribe((params)=>{
       this.chapterId = +params.get('chapterid');
+      this.chapterName= params.get('chaptername');
+      this.subjectId = +params.get('subjectid');
+      this.subjectName = params.get('subjectname');
+      
     })
    
   }
@@ -58,7 +59,7 @@ export class QuestionAddComponent implements OnInit {
       htmlText:['',Validators.required],
       plainText:[''],
       chapterId:[this.chapterId,Validators.required],
-      queTypeId:[0,Validators.required],
+      queTypeId:['',Validators.required],
       notes:[''],
       answerOptions:this.fb.array([this.newAnswerOptions()])
     });
@@ -75,5 +76,27 @@ export class QuestionAddComponent implements OnInit {
   }
   addAnswerOptions():void{
     this.answerOptions.push(this.newAnswerOptions());
+  }
+  onSubmit():void{
+    
+    if(this.questionForm.valid){
+      let dtoAdd:IQuestionDTOAdd = Object.assign(this.questionForm.value);
+        this.dataUpdateSub= this.questionBankDataService.add(dtoAdd).subscribe((data)=>{
+         if(data.recordsAffected>0){
+           this.questionForm.reset();
+           this.questionForm.get('chapterId').setValue(this.chapterId);
+       
+         }
+        })
+    }
+    
+  }
+  ngOnDestroy(): void {
+    if(this.routeDataSub){
+      this.routeDataSub.unsubscribe();
+    }
+    if(this.dataUpdateSub){
+      this.dataUpdateSub.unsubscribe();
+    }
   }
 }

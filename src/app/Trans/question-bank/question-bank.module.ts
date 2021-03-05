@@ -21,7 +21,7 @@ import { QuetypeLookupResolverService } from 'src/app/Core/services/resolvers/qu
         resolve:{resolveData:QuestionBankListResolveService}
       },
       {
-        path:'questionbankadd/:chapterid',
+        path:'questionbankadd/:chapterid/:chaptername/:subjectid/:subjectname',
         component:QuestionAddComponent,
         resolve:{resolveData:QuetypeLookupResolverService}
       }
