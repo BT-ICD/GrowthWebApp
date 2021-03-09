@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- To display question -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Question
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <p>{{currentQuestion.title}}</p>
+                    </div>
+                    <div class="row mt-2"  [innerHTML]="currentQuestion.htmlText">
+                        
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Summary:
+                </div>
+            </div>
+        </div>
+        <!-- To display options -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Choice
+                </div>
+                <div class="card-body">
+                    <!-- Answer Options -->
+                    <div class="row mt-1 container" *ngFor= "let option of currentQuestion.options; let i=index">
+                            <div class="row" >
+                                    <div class="col-md-12">
+                                        <div class="col">
+                                            <input  id="{{'option' + i}}" type="radio" [(ngModel)]="selectedAnswerId" name="options" [value]="option.answerOptionId">
+                                        </div>
+                                        <div class="col">
+                                                <label  for="{{'option' + i}}">
+                                                    {{option.htmlText}}
+                                                </label>
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="moveFirst()" [disabled]="position==0" >First</button>
+                            <button type="button" class="btn btn-sm btn-primary ml-1" (click)="movePrevious()" [disabled]="position==0">Previous</button>
+                            <button type="button" class="btn btn-sm btn-primary ml-1" (click)="moveNext()" [disabled]="position==(totalQuestions-1)">Next</button>
+                            <button type="button" class="btn btn-sm btn-primary ml-1"(click)="moveLast()" [disabled]="position==(totalQuestions-1)">Last</button>
+                        </div>
+                        <div class="col-md-2">
+                            {{position+1}}/{{totalQuestions}}
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="submitAnswer(1)">Submit</button>
+                            <button type="button" class="btn btn-sm btn-primary ml-1" (click)="submitAnswer(2)">Skip</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+</div>
