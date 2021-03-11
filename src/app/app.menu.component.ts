@@ -70,7 +70,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {label: 'Schedule', icon: 'pi pi-align-justify', routerLink: ['/myschedule']},
                     {label: 'Assignment', icon: 'pi pi-list', routerLink: ['/myassignments']},
-                    {label: 'Exam', icon: 'pi pi-list', routerLink: ['/myexam',1,1]}
+                    {label: 'Exam', icon: 'pi pi-list', routerLink: ['/selectExam']}
                     
                 ]
             }

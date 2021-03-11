@@ -13,9 +13,10 @@ export class StuExamDataResolveService implements Resolve<IExamDataResolve> {
 
   constructor(private stuExamDataService:StuExamDataService) { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IExamDataResolve | Observable<IExamDataResolve> | Promise<IExamDataResolve> {
+    let examStudentId =+route.paramMap.get('examStudentId'); 
     let examId = +route.paramMap.get('examid');
     let studentId = +route.paramMap.get('studentid');
-    return this.stuExamDataService.getExam(examId, studentId)
+    return this.stuExamDataService.getExam(examStudentId, examId, studentId)
     .pipe(
       map((data)=>({examData:data, error:null})),
       catchError((err)=>{

@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    Summary:
+                    Summary: Total: <span class="text-primary">{{totalQuestions}}</span>  Attempted <span class="text-success">{{attemptedQuestions}}</span> Skipped: <span class="text-warning">{{skippedQuestions}}</span>
                 </div>
             </div>
         </div>
@@ -54,8 +54,9 @@
                             {{position+1}}/{{totalQuestions}}
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-sm btn-primary" (click)="submitAnswer(1)">Submit</button>
-                            <button type="button" class="btn btn-sm btn-primary ml-1" (click)="submitAnswer(2)">Skip</button>
+                            <button type="button" class="btn btn-sm btn-primary" (click)="submitAnswer(1)" [disabled]="currentQuestion.questionStatus==1">Submit</button>
+                            <button type="button" class="btn btn-sm btn-primary ml-1" (click)="submitAnswer(2)" [disabled]="currentQuestion.questionStatus!=0">Skip</button>
+                            <button type="button" class="btn btn-sm btn-warning ml-1" (click)="finishExam()" >Finish</button>
                         </div>
                     </div>
                 </div>

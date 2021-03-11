@@ -9,6 +9,8 @@ export interface IQuestionAndOptions{
     title:string,
     htmlText:string,
     options:IAnswerOptions[];
+    questionStatus:number;       //To update in memory status
+    answerOptionId:number; //To update in memory anwer
 }
 export interface IExamData{
     examStudentId:number,

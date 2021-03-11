@@ -4,6 +4,11 @@ export interface IDeleteResponse{
 export interface IRecordsAffectedResponse{
     recordsAffected:number;
 }
+export interface IDataUpdateResponseDTO{
+    status:string,
+    description :string,
+    recordCount :number
+}
 //To fill id and value of subjets - for dropdown
 export interface ISubjectLookup{
     subjectId:number,
