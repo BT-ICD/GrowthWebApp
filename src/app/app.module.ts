@@ -95,6 +95,7 @@ import { AssignmentDocumentModule } from './Trans/assignment/assignment-document
 import { StuAssignmentsModule } from './studentRole/stu-assignments/stu-assignments.module';
 import { QuestionBankModule } from './Trans/question-bank/question-bank.module';
 import { StuExamModule } from './studentRole/stu-exam/stu-exam.module';
+import { ExamAdminModule } from './trans/exam-admin/exam-admin.module';
 
 @NgModule({
   declarations: [
@@ -126,8 +127,10 @@ import { StuExamModule } from './studentRole/stu-exam/stu-exam.module';
         AssignmentDocumentModule,
         StuAssignmentsModule,
         QuestionBankModule,
-        AppRoutingModule,
-        StuExamModule
+        StuExamModule,
+        ExamAdminModule,
+        AppRoutingModule
+        
         
         
         
