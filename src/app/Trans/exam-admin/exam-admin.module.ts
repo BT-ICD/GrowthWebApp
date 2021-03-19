@@ -4,6 +4,7 @@ import { ExamAdminListComponent } from './list/exam-admin-list.component';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ExamAdminAddComponent } from './add/exam-admin-add.component';
+import { SubjectLookupResolverService } from 'src/app/Core/services/subject-lookup-resolver.service';
 
 
 
@@ -19,7 +20,8 @@ import { ExamAdminAddComponent } from './add/exam-admin-add.component';
       },
       {
         path:'examadminadd',
-        component:ExamAdminAddComponent
+        component:ExamAdminAddComponent,
+        resolve: {resolveSubjects:SubjectLookupResolverService}
       }
     ])
   ]

@@ -1,1 +1,110 @@
-<p>exam-admin-add works!</p>
+<div class="container-fluid">
+    <div class="p-card">
+        <!-- Header Row -->
+            <div class="row">
+                <div class="col-md-4">
+                  <h5 class="mt-2">Exam</h5>
+                </div>
+            </div>
+        <!-- Form Controls Row -->
+        <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+            <div class="p-card mt-2">
+                    <!-- Subject Name and Total Questions-->
+                    <div class="row mt-2" >
+                        <label for="subjectId" class="col-md-2" >Subject</label>
+                        <div class="col-md-4">
+                            <p-dropdown  id="subjectId" [options]="subjects"  formControlName="subjectId" optionLabel="name" optionValue="subjectId"
+                                datakey="subjectId"  autoDisplayFirst="false" placeholder="Select Subject"
+                                [ngClass]="{'is-invalid':((examForm.get('subjectId').touched ||examForm.get('subjectId').dirty) &&
+                                !examForm.get('subjectId').valid)
+                                }"
+                            >
+                            </p-dropdown>
+                            <span class="invalid-feedback">
+                                    <span *ngIf="examForm.get('subjectId').errors?.required">
+                                        Subject is required
+                                    </span>
+                            </span>
+                        </div>   
+                        <div class="col-md-6">
+                            <label for="totalQuestions" class="col-md-2" >Questions</label>
+                            <input id="totalQuestions"  class="col-md-2" name="totalQuestions" type="number" formControlName="totalQuestions" role="textbox" pInputText>
+                        </div>
+                    </div>
+                    <!--  Notes -->
+                    <div class="row mt-1">
+                        <label for="notes" class="col-md-2" >Notes</label>
+                        <div class="col-md-8">
+                            <textarea id="notes" class="col-md-12" name="notes" type="text" formControlName="notes"  rows="2"></textarea>
+                        </div>
+                    </div>
+                     <!-- List of questions (Question table) -->
+                     <div class="row mt-1">
+                        <div class="col-md-12">
+                            <p-table #dt [columns]="cols" [value]="questions" selectionMode="multiple"
+                             [paginator]="true" [rows]="10"  [(selection)]="selectedQuestions" dataKey="questionId"
+                            styleClass="p-datatable-sm p-datatable-responsive-demo">
+                            <ng-template pTemplate="caption">
+                                <div class="form-group row">
+                                    <div class="col-md-1">
+                                        <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV"
+                                            (click)="dt.exportCSV()"></button>
+                                    </div>
+                                    <div class="col-md-11 d-flex justify-content-end">
+                                        <i class="pi pi-search" style="margin: 4px 4px 0 0"></i>
+                                        <input type="text" pInputText  placeholder="Global Filter"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width: auto" />
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th style="width: 2.25em">
+                                        <p-tableHeaderCheckbox ></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                                        [ngStyle]="{width: col.width, display: col.display}">
+                                        {{ col.header }}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-question let-columns="columns">
+                                <tr  [pSelectableRowIndex]="rowIndex" class="p-selectable-row">
+                                    <td>
+                                        <p-tableCheckbox [value]="question" ></p-tableCheckbox>
+                                    </td>
+                                    <td *ngFor="let col of columns" [ngStyle]="{display: col.display}">
+                                        <span class="p-column-title">{{col.header}}</span>
+                                        {{question[col.field]}}
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        </div>
+                     </div>
+            </div>
+           
+
+            <!-- Action Buttons -->
+            <div class="p-card mt-2">
+                <div class="col-md-4 offset-md-2">
+                        <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
+                        <button type="button" label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/examadminlist']" pButton></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- To display error -->
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+</div>
+<p-toast position="top-right"></p-toast>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBatchLookup, IDocumentTypeLookup, IQueTypeLookup, IStudentLookup, ISubjectLookup } from '../types/common-types';
+import { IBatchLookup, IDocumentTypeLookup,  IQuestions,  IQueTypeLookup, IStudentLookup, ISubjectLookup } from '../types/common-types';
 import { DataConstantsService } from './data-constants.service';
 
 @Injectable({
@@ -30,6 +30,13 @@ export class LookupValuesService {
     const url:string = this.dataConstantsService.BASEAPIURL + 'QueType/Lookup';
     return this.http.get<IQueTypeLookup[]>(url);
   }
-  
+  getQuestions(subjectid:number,chapterId?:number):Observable<IQuestions[]>{
+
+    let url:string = this.dataConstantsService.BASEAPIURL +'QuestionBank/GetList/'+ subjectid;
+    if(chapterId){
+      url+= "/" + chapterId;
+    }
+    return this.http.get<IQuestions[]>(url);
+  }
   
 }

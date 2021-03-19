@@ -9,5 +9,5 @@ export interface IExamDTOAdd {
     subjectId:number,
     totalQuestions:number,
     notes:string,
-    questionsIds:string
+    questionIds:string
 }

@@ -11,8 +11,12 @@ import { IQuestionDTOAdd, IQuestionListDTO } from './iquestion-bank-types';
 export class QuestionBankDataService {
 
   constructor(private http:HttpClient, private dataConstantsService:DataConstantsService ){ }
-  getList(chapterId:number):Observable<IQuestionListDTO[]>{
-    const url:string = this.dataConstantsService.BASEAPIURL +'QuestionBank/GetList/'+ chapterId;
+  getList(subjectid:number,chapterId?:number):Observable<IQuestionListDTO[]>{
+
+    let url:string = this.dataConstantsService.BASEAPIURL +'QuestionBank/GetList/'+ subjectid;
+    if(chapterId){
+      url+= "/" + chapterId;
+    }
     return this.http.get<IQuestionListDTO[]>(url);
   }
   add(dtoAdd:IQuestionDTOAdd):Observable<IRecordsAffectedResponse>{

@@ -20,11 +20,11 @@ export class QuestionBankListResolveService implements Resolve<IQuestionListReso
     if(isNaN(chapterId)){
       return of({questions:null, chapterId:null,subjectId:null,subjectName:null, chapterName:null, error:'Invalid chapter id, it must be numereic'});
     }
-    return this.questionBankDataService.getList(chapterId)
+    return this.questionBankDataService.getList(subjectId, chapterId)
       .pipe(
         map((data)=>({questions:data,chapterId,subjectId,subjectName, chapterName, error:null})),
         catchError((err)=>{
-          const message:string = `Error in retrieval {err.statusText}`;
+          const message:string = `Error in retrieval ${err.statusText}`;
           return of({questions:null,chapterId:null, subjectId:null,subjectName:null, chapterName:null,error:message});
         })
       );

@@ -67,3 +67,9 @@ export interface IQueTypeResolver{
     queTypeLookup:IQueTypeLookup[],
     error?:any
 }
+export interface IQuestions {
+    questionId:number,
+    title:string,
+    htmlText:string,
+    queTypeId:number
+}
