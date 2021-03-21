@@ -70,7 +70,8 @@ export class QuestionAddComponent implements OnInit , OnDestroy{
   newAnswerOptions():FormGroup{
     let ansOption = this.fb.group({
       htmlText:['',Validators.required],
-      plainText:['']
+      plainText:[''],
+      isCorrect:[false]
     });
     return ansOption;
   }

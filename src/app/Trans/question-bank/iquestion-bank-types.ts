@@ -14,7 +14,8 @@ error?:any
 }
 export interface IAnswerOptions{
     htmlText:string,
-    plainText:string
+    plainText:string,
+    isCorrect:boolean
 }
 export interface IQuestionDTOAdd{
     title:string,
