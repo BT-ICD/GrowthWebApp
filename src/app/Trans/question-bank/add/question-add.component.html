@@ -13,8 +13,8 @@
             <div class="p-card mt-2">
                     <!-- Title Name -->
                     <div class="row mt-1" >
-                        <label for="name" class="col-md-2" >Title</label>
-                        <div class="col-md-8">
+                        <label for="name" class="col-md-1" >Title</label>
+                        <div class="col-md-6">
                             <input id="name" class="col-md-8" name="title" type="text" formControlName="title"  role="textbox"  pInputText 
                                 [ngClass]="{'is-invalid':((questionForm.get('title').touched ||questionForm.get('title').dirty) &&
                                     !questionForm.get('title').valid)
@@ -27,11 +27,14 @@
                                 </span>
                             </span>
                         </div>   
+                        <div class="col-md-4">
+                            Preview of question <hr color="blue">
+                        </div>
                     </div>
                     <!-- HTML Text -->
                     <div class="row mt-1">
-                        <label for="htmlText" class="col-md-2" >Question HTML</label>
-                        <div class="col-md-8">
+                        <label for="htmlText" class="col-md-1" >Question HTML</label>
+                        <div class="col-md-6">
                             <textarea id="htmlText" class="col-md-8" name="htmlText" formControlName="htmlText" rows="10"
                             [ngClass]="{'is-invalid':((questionForm.get('htmlText').touched ||questionForm.get('htmlText').dirty) &&
                                 !questionForm.get('htmlText').valid)
@@ -44,11 +47,15 @@
                                 </span>
                             </span>
                         </div>
+                        <!-- Preview of question  -->
+                        <div class="col-md-5" [innerHtml]="questionForm.get('htmlText').value">
+                            
+                        </div>
                     </div>
                     <!-- QueType -->
                     <div class="row mt-1">
-                        <label for="queTypeId" class="col-md-2" >Type</label>
-                        <div class="col-md-8">
+                        <label for="queTypeId" class="col-md-1" >Type</label>
+                        <div class="col-md-6">
                             <p-dropdown  id="queTypeId" [options]="queTypeLookup"  formControlName="queTypeId" optionLabel="questionType" optionValue="queTypeId"
                                 datakey="queTypeId"  autoDisplayFirst="false" placeholder="Select Question Type"
                                 
@@ -65,8 +72,8 @@
                     </div>
                     <!--  Notes -->
                     <div class="row mt-1">
-                        <label for="notes" class="col-md-2" >Notes</label>
-                        <div class="col-md-8">
+                        <label for="notes" class="col-md-1" >Notes</label>
+                        <div class="col-md-6">
                             <textarea id="notes" class="col-md-8" name="notes" type="text" formControlName="notes"  rows="1"></textarea>
                         </div>
                         <button class="btn btn-outline-primary" (click)="addAnswerOptions()">Add New Option</button>
@@ -76,8 +83,8 @@
                     <div  formArrayName="answerOptions" *ngFor="let answerOption of answerOptions.controls; let i=index">
                         <!-- Answer Option -->
                         <div class="row  mt-1" [formGroupName]="i">
-                            <label attr.for="{{'htmlText' + i}}" class="col-md-2" >Option {{i+1}}</label>
-                            <div class="col-md-8">
+                            <label attr.for="{{'htmlText' + i}}" class="col-md-1" >Option {{i+1}}</label>
+                            <div class="col-md-6">
                                 <textarea id="{{'htmlText' + i}}" class="col-md-8" name="htmlText" type="text" formControlName="htmlText"  rows="3" 
                                 [ngClass]="{'is-invalid':((answerOptions.controls[i].get('htmlText').touched ||answerOptions.controls[i].get('htmlText').dirty) &&
                                 !answerOptions.controls[i].get('htmlText').valid)
@@ -89,7 +96,7 @@
                                     </span>
                                 </span>
                             </div>   
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <p-checkbox formControlName="isCorrect" [binary]="true"></p-checkbox>
                             </div>
                         </div>
