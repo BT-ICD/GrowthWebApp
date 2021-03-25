@@ -73,3 +73,6 @@ export interface IQuestions {
     htmlText:string,
     queTypeId:number
 }
+export interface IBooleanResult{
+    result:boolean
+}
