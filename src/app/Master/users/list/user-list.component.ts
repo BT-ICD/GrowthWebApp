@@ -5,7 +5,7 @@ import { IAppUserDTOList, IAppUserListResolve } from '../iuser-types';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  styleUrls: ['./user-list.component.scss','./tabledemo.scss']
 })
 export class UserListComponent implements OnInit {
 users:IAppUserDTOList[];
@@ -25,7 +25,7 @@ loadData():void{
     if(this.appUserListResolve.error){
       this.errorMessage= this.appUserListResolve.error;
     }
-    console.log(this.users);
+    
   });
 }
 initializeCols():void{

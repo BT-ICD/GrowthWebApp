@@ -20,7 +20,7 @@ export class AppUserDataService {
     return this.http.get<IBooleanResult>(url);
   }
   createUser(appUser:IAppUser):Observable<IDataUpdateResponseDTO>{
-    const url:string = this.dataConstantsService.BASEAPIURL +'AppUser';
+    const url:string = this.dataConstantsService.BASEAPIURL +'AppUser/CreateUser';
     return this.http.post<IDataUpdateResponseDTO>(url,appUser);
   }
 }

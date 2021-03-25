@@ -13,10 +13,9 @@
                     <div class="row mt-1" >
                         <label for="userName" class="col-md-2" >User Name</label>
                         <div class="col-md-8">
-                            <input id="userName" class="col-md-4" name="userName" type="text" formControlName="userName"  role="textbox"  pInputText 
+                            <input id="userName" class="col-md-4" name="userName" type="text" formControlName="userName"  
                                 [ngClass]="{'is-invalid':((userForm.get('userName').touched ||userForm.get('userName').dirty) &&
-                                    !userForm.get('userName').valid)
-                                }"
+                                    !userForm.get('userName').valid) }"
                             >
                             <span class="invalid-feedback">
                                 <span *ngIf="userForm.get('userName').errors?.required">
@@ -29,8 +28,8 @@
                     <div class="row mt-1">
                         <label for="email" class="col-md-2" >Email</label>
                         <div class="col-md-8">
-                            <input id="email" class="col-md-4" name="email" type="text" formControlName="email" role="textbox" pInputText
-                            [ngClass]="{'is-invalid':((userForm.get('email').touched ||userForm.get('useremailName').dirty) &&
+                            <input id="email" class="col-md-4" name="email" type="email" formControlName="email" role="textbox" pInputText
+                            [ngClass]="{'is-invalid':((userForm.get('email').touched ||userForm.get('email').dirty) &&
                                     !userForm.get('email').valid)
                                 }"
                             >
@@ -38,48 +37,53 @@
                                 <span *ngIf="userForm.get('email').errors?.required">
                                     Email is required
                                 </span>
-                            </span>
-                        </div>
-                    </div>
-                    <!--  Password -->
-                    <div class="row mt-1">
-                        <label for="userPassword" class="col-md-2" >Password</label>
-                        <div class="col-md-8">
-                            <input id="userPassword" class="col-md-4" name="userPassword" type="text" formControlName="userPassword" role="textbox" pInputText
-                            [ngClass]="{'is-invalid':((userForm.get('userPassword').touched ||userForm.get('userPassword').dirty) &&
-                                    !userForm.get('userPassword').valid)
-                                }"
-                            >
-                            <span class="invalid-feedback">
-                                <span *ngIf="userForm.get('userPassword').errors?.required">
-                                    Password is required
+                                <span *ngIf="userForm.get('email').errors?.email">
+                                    Please enter a valid email address
                                 </span>
                             </span>
                         </div>
                     </div>
-                    <!--  Confirm Password -->
-                    <div class="row mt-1">
-                        <label for="confirmPassword" class="col-md-2" >Confirm Password</label>
-                        <div class="col-md-8">
-                            <input id="confirmPassword" class="col-md-4" name="confirmPassword" type="text" formControlName="confirmPassword" role="textbox" pInputText
-                            [ngClass]="{'is-invalid':((userForm.get('confirmPassword').touched ||userForm.get('confirmPassword').dirty) &&
-                                    !userForm.get('confirmPassword').valid)
-                                }"
-                            >
-                            <span class="invalid-feedback">
-                                <span *ngIf="userForm.get('confirmPassword').errors?.required">
-                                    Confirm Password is required
+                    <!-- Password and Confirm Password -->
+                    <div class="row mt-1" formGroupName="passwordGroup">
+                        <!--  Password -->
+                        <div class="row col-md-12 mt-1">
+                             <label for="userPassword" class="col-md-2" >Password</label>
+                            <div class="col-md-8">
+                                <input id="userPassword" type="password" class="col-md-4" name="userPassword"  formControlName="userPassword" role="textbox" pInputText
+                                [ngClass]="{'is-invalid': userForm.get('passwordGroup').errors ||((userForm.get('passwordGroup.userPassword').touched ||userForm.get('passwordGroup.userPassword').dirty) &&
+                                        !userForm.get('passwordGroup.userPassword').valid)}" />
+                                <span class="invalid-feedback">
+                                    <span *ngIf="userForm.get('passwordGroup.userPassword').errors?.required">
+                                        Password is required
+                                    </span>
                                 </span>
-                            </span>
+                            </div>
+                        </div>
+                        <!--  Confirm Password -->
+                        <div class="row col-md-12 mt-1">
+                            <label for="confirmPassword" class="col-md-2" >Confirm Password</label>
+                            <div class="col-md-8">
+                                <input id="confirmPassword" type="password" class="col-md-4" name="confirmPassword" formControlName="confirmPassword" role="textbox" pInputText
+                                [ngClass]="{'is-invalid': userForm.get('passwordGroup').errors ||((userForm.get('passwordGroup.confirmPassword').touched ||userForm.get('passwordGroup.confirmPassword').dirty) &&
+                                        !userForm.get('passwordGroup.confirmPassword').valid) }" />
+                                <span class="invalid-feedback">
+                                    <span *ngIf="userForm.get('passwordGroup.confirmPassword').errors?.required">
+                                        Confirm Password is required
+                                    </span>
+                                    <span *ngIf="userForm.get('passwordGroup').errors?.match">
+                                        Password and confirm password must be same                                    </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
+                    
                     
             </div>
             <!-- Action Buttons -->
             <div class="p-card mt-2">
                 <div class="col-md-4 offset-md-2">
                         <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
-                        <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/userlist']" pButton></button>
+                        <button label="Cancel" type="button" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/userlist']" pButton></button>
                 </div>
             </div>
         </form>
