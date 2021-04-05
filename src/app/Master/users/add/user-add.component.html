@@ -21,6 +21,12 @@
                                 <span *ngIf="userForm.get('userName').errors?.required">
                                     User Name is required
                                 </span>
+                                <span *ngIf="userForm.get('userName').errors?.minlength">
+                                    User Name requires at least 5 characters.
+                                </span>
+                                <span *ngIf="userForm.get('userName').errors?.isUserNameExist">
+                                    User Name is already taken, try another user name.
+                                </span>
                             </span>
                         </div>   
                     </div>
@@ -76,8 +82,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
             </div>
             <!-- Action Buttons -->
             <div class="p-card mt-2">

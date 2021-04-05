@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import { UserNameExistService } from 'src/app/Core/services/custom-validators/user-name-exist.service';
 import { AppUserDataService } from '../app-user-data.service';
 import { IAppUser } from '../iuser-types';
 
@@ -13,7 +16,7 @@ export class UserAddComponent implements OnInit {
   userForm:FormGroup;
   appUser:IAppUser;
   errorMessage:string;
-  constructor(private route: ActivatedRoute, private router:Router, private fb:FormBuilder, private appUserDataService:AppUserDataService) { }
+  constructor(private route: ActivatedRoute, private router:Router, private fb:FormBuilder, private appUserDataService:AppUserDataService, private userNameExistService:UserNameExistService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -21,7 +24,7 @@ export class UserAddComponent implements OnInit {
   initializeForm():void{
     this.userForm = this.fb.group(
       {
-        userName:['',Validators.required],
+        userName:['',[Validators.required, Validators.minLength(5)],[this.userNameExistService.validateUniqueUserName(this.appUserDataService)]],
         email:['',[Validators.required,Validators.email]],
         passwordGroup:this.fb.group({
           userPassword:['',Validators.required],
@@ -31,6 +34,7 @@ export class UserAddComponent implements OnInit {
     )
   }
   onSubmit():void{
+    console.log(this.userForm.valid);
     if(this.userForm.valid){
       this.appUser ={
         userName:this.userForm.get('userName').value,
@@ -60,6 +64,4 @@ export class UserAddComponent implements OnInit {
     }
     return {'match':true};
   }
-  
-
 }
