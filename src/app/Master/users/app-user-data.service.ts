@@ -16,7 +16,6 @@ export class AppUserDataService {
     return this.http.get<IAppUserDTOList[]>(url);
   }
   IsUserNameExist(userName:string):Observable<IBooleanResult>{
-    console.log('service called IsUserNameExist');
     const url:string = this.dataConstantsService.BASEAPIURL + 'AppUser/IsUserNameExist/' + userName;
     return this.http.get<IBooleanResult>(url);
   }

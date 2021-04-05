@@ -35,7 +35,8 @@ export class AppLoginComponent implements OnInit {
         next:(data)=>this.onLoginSuccess(data),
         error:(err)=>this.onLoginError(err)
       });
-      this.displayLoader=false;
+      
+
     }
   }
   onLoginSuccess(userToken:ITokenModel){
@@ -43,7 +44,7 @@ export class AppLoginComponent implements OnInit {
     this.authDataService.userToken = userToken;
     this.authDataService.userName=this.loginModel.userName;
     this.router.navigate(['/']);
-
+    this.displayLoader=false;
   }
   onLoginError(err){
     if(err.status==401){
@@ -54,5 +55,6 @@ export class AppLoginComponent implements OnInit {
     }
     this.authDataService.userToken=null;
     this.authDataService.userName='';
+    this.displayLoader=false;
   }
 }

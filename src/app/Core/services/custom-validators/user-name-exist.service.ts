@@ -22,7 +22,6 @@ export class UserNameExistService {
     if(!c || String(c.value).length===0){
       return of(null);
     }
-  
     return appUserDataService.IsUserNameExist(c.value)
       .pipe(
         debounceTime(500),map(data=>{

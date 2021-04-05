@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
 import { UserNameExistService } from 'src/app/Core/services/custom-validators/user-name-exist.service';
 import { AppUserDataService } from '../app-user-data.service';
 import { IAppUser } from '../iuser-types';
@@ -34,7 +32,6 @@ export class UserAddComponent implements OnInit {
     )
   }
   onSubmit():void{
-    console.log(this.userForm.valid);
     if(this.userForm.valid){
       this.appUser ={
         userName:this.userForm.get('userName').value,
