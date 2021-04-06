@@ -116,7 +116,7 @@ import { UsersModule } from './Master/users/users.module';
         MenuModule,
         MenubarModule,
         AppCodeModule,
-
+SplitButtonModule,
 
         SubjectModule,
         ChapterModule,

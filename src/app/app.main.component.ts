@@ -1,7 +1,8 @@
 import {Component, AfterViewInit, OnDestroy, ViewChild, Renderer2, OnInit} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
-
+import { AuthDataService } from './Core/services/auth/auth-data.service';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-main',
     templateUrl: './app.main.component.html',
@@ -43,11 +44,20 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     inputStyle = 'outlined';
 
     ripple = false;
-
-    constructor(public renderer: Renderer2, private primengConfig: PrimeNGConfig) {}
+    private _actionItems: any[]; //Menu Items for Split Button for User Profile
+    public get actionItems(): any[] {
+        return this._actionItems;
+    }
+    public set actionItems(value: any[]) {
+        this._actionItems = value;
+    }
+    isAuthenticated:boolean = this.authDataService.isAuthenticated;
+    constructor(public renderer: Renderer2, private primengConfig: PrimeNGConfig, private router:Router, public authDataService:AuthDataService) {}
 
     ngOnInit() {
         this.primengConfig.ripple = true;
+        this.initializeActionItems();
+        //this.isAuthenticated= this.authDataService.isAuthenticated;
     }
 
     ngAfterViewInit() {
@@ -71,6 +81,8 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
             this.menuClick = false;
             this.topMenuButtonClick = false;
         });
+
+       
     }
 
     toggleMenu(event: Event) {
@@ -139,7 +151,31 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     onSearchClick() {
         this.topMenuButtonClick = true;
     }
-
+    //Menu Items for User Profile Split Button for logged in user
+    initializeActionItems():void{
+            this.actionItems = [
+                {label: 'Profile', icon: 'pi pi-users', command: () => {
+                  this.openProfile();
+                    }
+                },
+                {label: 'Logout', icon: 'pi pi-users', command: () => {
+                    this.logout();
+                      }
+                  }
+             
+          ];
+    }
+    
+    openLogin():void{
+        this.router.navigate(['/login']);
+    }
+    openProfile():void{
+        alert('profile ...');
+    }
+    logout():void{
+        this.authDataService.logout();
+        this.router.navigate(['/login']);
+    }
     ngOnDestroy() {
         if (this.documentClickListener) {
             this.documentClickListener();

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ITokenModel } from 'src/app/user-login/user-login-types';
 
 @Injectable({
@@ -7,6 +8,8 @@ import { ITokenModel } from 'src/app/user-login/user-login-types';
 export class AuthDataService {
 //To get logged in user token
   private _userToken: ITokenModel;
+  
+ 
 //to determine user is authenticated or not
   private _isAuthenticated: boolean;
   public get isAuthenticated(): boolean {
@@ -69,5 +72,13 @@ export class AuthDataService {
   public set userRole(value: string) {
     this._userRole = value;
     
+  }
+  logout():void{
+    sessionStorage.removeItem('userName');
+    sessionStorage.removeItem('userRole');
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('tokenObj');
+    this.isAuthenticated=false;
+
   }
 }
