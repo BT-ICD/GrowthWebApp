@@ -8,7 +8,24 @@ export class AuthDataService {
 //To get logged in user token
   private _userToken: ITokenModel;
 //to determine user is authenticated or not
-isAuthenticated:boolean;
+  private _isAuthenticated: boolean;
+  public get isAuthenticated(): boolean {
+    // return this._isAuthenticated;
+    if(sessionStorage.getItem('isAuthenticated'))
+    {
+      let value = sessionStorage.getItem('isAuthenticated')
+      if(value==='true')
+          return true;
+      else
+        return false;
+    }
+    else{
+      return false;
+    }
+  }
+  public set isAuthenticated(value: boolean) {
+    this._isAuthenticated = value;
+  }
   private _userName: string;
   private _userRole: string;
 
@@ -25,24 +42,32 @@ isAuthenticated:boolean;
       this.isAuthenticated = true;
       this.userRole= value.role;
       sessionStorage.setItem('tokenObj',JSON.stringify(value));
+      sessionStorage.setItem('userRole', value.role);
+      sessionStorage.setItem('isAuthenticated','true');
     }
     else
     {
       this.isAuthenticated = false;
       this.userRole='';
       sessionStorage.removeItem('tokenObj');
+      sessionStorage.removeItem('userRole');
+      sessionStorage.removeItem('isAuthenticated');
     }
   }
   public get userName(): string {
-    return this._userName;
+    // return this._userName;
+    return sessionStorage.getItem('userName');
   }
   public set userName(value: string) {
     this._userName = value;
+    sessionStorage.setItem('userName',value);
   }
   public get userRole(): string {
-    return this._userRole;
+    // return this._userRole;
+    return sessionStorage.getItem('userRole');
   }
   public set userRole(value: string) {
     this._userRole = value;
+    
   }
 }

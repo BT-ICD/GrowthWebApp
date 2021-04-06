@@ -132,13 +132,6 @@ import { UsersModule } from './Master/users/users.module';
         ExamAdminModule,
         UsersModule,
         AppRoutingModule
-        
-        
-        
-        
-        
-        
-        
   ],
   providers: [{provide:MenuService},{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]
