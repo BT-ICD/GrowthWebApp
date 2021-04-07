@@ -6,11 +6,11 @@ import { AuthDataService } from './Core/services/auth/auth-data.service';
     selector: 'app-menu',
     template: `
         <div class="menu">
-            <ng-container *ngIf="this.authDataService.isAuthenticated; then loggedIn; else guest">
+            <ng-container *ngIf="isAuthenticated; then loggedIn; else guest">
             </ng-container>
 
             <ng-template #loggedIn>
-                    <div [ngSwitch]="this.authDataService?.userRole">
+                    <div [ngSwitch]="appUserRole">
                         <div *ngSwitchCase="'Manager'">
                             <ul class="layout-menu" >
                                 <li app-menuitem *ngFor="let item of modelManager; let i = index;" [item]="item" [index]="i" [root]="true"></li>
@@ -33,18 +33,20 @@ import { AuthDataService } from './Core/services/auth/auth-data.service';
                     <li app-menuitem *ngFor="let item of modelGuest; let i = index;" [item]="item" [index]="i" [root]="true"></li>
                 </ul>
             </ng-template>
-         
         </div>
     `
 })
 export class AppMenuComponent implements OnInit {
-    constructor( public authDataService:AuthDataService){}
+    constructor( private authDataService:AuthDataService){}
     private modelManager: any[];
     private modelStudent: any[];
     private modelGuest:any[];
-    isAuthenticated:boolean = this.authDataService.isAuthenticated;
+    isAuthenticated:boolean;
+    appUserRole:string;
     
     ngOnInit() {
+        this.authDataService.appUserRole$.subscribe((data)=>this.appUserRole=data);
+        this.authDataService.loginStatus$.subscribe((data)=>this.isAuthenticated=data);
         this.modelManager = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
             {
@@ -60,8 +62,6 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Schedule', icon: 'pi pi-fw pi-check-square', routerLink: ['/schedule']},
                     {label: 'Assignment', icon: 'pi pi-fw pi-id-card', routerLink: ['/assignment']},
                     {label: 'Exam', icon: 'pi pi-fw pi-id-card', routerLink: ['/examadminlist']},
-
-                    
                 ]
             }
         ];
@@ -73,7 +73,6 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Schedule', icon: 'pi pi-align-justify', routerLink: ['/myschedule']},
                     {label: 'Assignment', icon: 'pi pi-list', routerLink: ['/myassignments']},
                     {label: 'Exam', icon: 'pi pi-list', routerLink: ['/selectExam']}
-                    
                 ]
             }
             
@@ -90,8 +89,6 @@ export class AppMenuComponent implements OnInit {
             }
             
         ];
-       
-        
     }
   
 }

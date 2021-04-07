@@ -51,15 +51,20 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     public set actionItems(value: any[]) {
         this._actionItems = value;
     }
-    isAuthenticated:boolean = this.authDataService.isAuthenticated;
-    constructor(public renderer: Renderer2, private primengConfig: PrimeNGConfig, private router:Router, public authDataService:AuthDataService) {}
+    loginStatus:boolean; //To determine login status - to load profile menu options
+    currentUserName:string;
+    constructor(public renderer: Renderer2, private primengConfig: PrimeNGConfig, private router:Router, private authDataService:AuthDataService) {}
 
     ngOnInit() {
         this.primengConfig.ripple = true;
+        this.authDataService.loginStatus$.subscribe((data)=>this.loginStatus=data);
+        this.authDataService.currentUserName$.subscribe((data)=>this.onUserLoginChange(data));
         this.initializeActionItems();
-        //this.isAuthenticated= this.authDataService.isAuthenticated;
     }
-
+    onUserLoginChange(data:string):void{
+        this.currentUserName=data;
+        this.initializeActionItems();
+    }
     ngAfterViewInit() {
         // hides the overlay menu and top menu if outside is clicked
         this.documentClickListener = this.renderer.listen('body', 'click', (event) => {
@@ -154,7 +159,7 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     //Menu Items for User Profile Split Button for logged in user
     initializeActionItems():void{
             this.actionItems = [
-                {label: 'Profile', icon: 'pi pi-users', command: () => {
+                {label: this.currentUserName, icon: 'pi pi-users', command: () => {
                   this.openProfile();
                     }
                 },

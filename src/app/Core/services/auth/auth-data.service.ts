@@ -6,33 +6,21 @@ import { ITokenModel } from 'src/app/user-login/user-login-types';
   providedIn: 'root'
 })
 export class AuthDataService {
-//To get logged in user token
+  //To get logged in user token
   private _userToken: ITokenModel;
-  
- 
-//to determine user is authenticated or not
-  private _isAuthenticated: boolean;
-  public get isAuthenticated(): boolean {
-    // return this._isAuthenticated;
-    if(sessionStorage.getItem('isAuthenticated'))
-    {
-      let value = sessionStorage.getItem('isAuthenticated')
-      if(value==='true')
-          return true;
-      else
-        return false;
-    }
-    else{
-      return false;
-    }
-  }
-  public set isAuthenticated(value: boolean) {
-    this._isAuthenticated = value;
-  }
   private _userName: string;
-  private _userRole: string;
 
-  constructor() { }
+  private loginStatus = new BehaviorSubject<boolean>(false);
+  loginStatus$ = this.loginStatus.asObservable();
+  private appUserRole = new BehaviorSubject<string>("");
+  appUserRole$ = this.appUserRole.asObservable();
+  private currentUserName = new BehaviorSubject<string>("")
+  currentUserName$ = this.currentUserName.asObservable();
+
+  constructor() {
+    //To initialize loggin details - if user refresh browser then it fetched login details from local storage
+    this.initializeFromSessionStorage();
+  }
   public get userToken(): ITokenModel {
     let tokenObj = sessionStorage.getItem('tokenObj');
     this._userToken = JSON.parse(tokenObj);
@@ -40,45 +28,61 @@ export class AuthDataService {
   }
   public set userToken(value: ITokenModel) {
     this._userToken = value;
-    if(value!=null){
+    if (value != null) {
       //todo - to validate token - with role and other parameter
-      this.isAuthenticated = true;
-      this.userRole= value.role;
-      sessionStorage.setItem('tokenObj',JSON.stringify(value));
+      sessionStorage.setItem('tokenObj', JSON.stringify(value));
       sessionStorage.setItem('userRole', value.role);
-      sessionStorage.setItem('isAuthenticated','true');
+      sessionStorage.setItem('isAuthenticated', 'true');
+      this.loginStatus.next(true);
+      this.appUserRole.next(value.role);
+
     }
-    else
-    {
-      this.isAuthenticated = false;
-      this.userRole='';
+    else {
       sessionStorage.removeItem('tokenObj');
       sessionStorage.removeItem('userRole');
       sessionStorage.removeItem('isAuthenticated');
+      this.loginStatus.next(false);
+      this.appUserRole.next("");
+
     }
   }
-  public get userName(): string {
-    // return this._userName;
-    return sessionStorage.getItem('userName');
-  }
+
   public set userName(value: string) {
     this._userName = value;
-    sessionStorage.setItem('userName',value);
+    sessionStorage.setItem('userName', value);
+    this.currentUserName.next(value)
   }
-  public get userRole(): string {
-    // return this._userRole;
-    return sessionStorage.getItem('userRole');
-  }
-  public set userRole(value: string) {
-    this._userRole = value;
-    
-  }
-  logout():void{
+
+  logout(): void {
     sessionStorage.removeItem('userName');
     sessionStorage.removeItem('userRole');
     sessionStorage.removeItem('isAuthenticated');
     sessionStorage.removeItem('tokenObj');
-    this.isAuthenticated=false;
+    // this.isAuthenticated=false;
+    this.loginStatus.next(false);
+    this.appUserRole.next("");
+    this.currentUserName.next("");
+  }
+  initializeFromSessionStorage(): void {
+    console.log('initialize credential from local storage');
+    if (sessionStorage.getItem("isAuthenticated") === 'true') {
+      this.loginStatus.next(true);
+    }
+    else {
+      this.loginStatus.next(false);
+    }
+    if (sessionStorage.getItem("userRole") != null) {
+      this.appUserRole.next(sessionStorage.getItem("userRole"));
 
+    }
+    else {
+      this.appUserRole.next("");
+    }
+    if (sessionStorage.getItem('userName') != null) {
+      this.userName = sessionStorage.getItem('userName');
+    }
+    else {
+      this.userName = "";
+    }
   }
 }

@@ -26,10 +26,11 @@
                 <span class="topbar-item-text">User</span>
                 <span class="topbar-icon pi pi-user"></span>
             </a> -->
-           <div *ngIf="authDataService.isAuthenticated===true">
+            
+           <div *ngIf="loginStatus">
                 <p-splitButton  icon="pi pi-user"  [model]="actionItems"></p-splitButton>
            </div>
-           <div *ngIf="authDataService.isAuthenticated===false">
+           <div *ngIf="!loginStatus">
             <a routerLink="/login">
                 <span class="topbar-item-text">User</span>
                 <span class="topbar-icon pi pi-user"></span>
