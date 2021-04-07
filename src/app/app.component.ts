@@ -15,12 +15,12 @@ export class AppComponent {
   }
   checkRouterEvents(routerEvent:Event){
     if(routerEvent instanceof NavigationStart){
-      console.log('Navigation start');
+      // console.log('Navigation start');
     }
     if(routerEvent instanceof NavigationEnd || 
         routerEvent instanceof NavigationCancel || 
         routerEvent instanceof NavigationError  ){
-          console.log('Navigation End or Error or Cancelled')
+          // console.log('Navigation End or Error or Cancelled')
     }
   }
 }
