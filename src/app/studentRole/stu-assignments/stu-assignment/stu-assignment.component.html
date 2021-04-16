@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <div class="p-card">
+        <!-- Header Row -->
+            <div class="row">
+                <div class="col-md-4">
+                  <h5 class="mt-2">Assignment</h5>
+                </div>
+            </div>
+        <!-- Form Controls Row -->
+        <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+            <div class="p-card mt-2 ">
+                    <div class="container">
+                                        <!-- Assignment Id - Question Title and Allocated On -->
+                    <div class="row mt-1" >
+                        <div class="col-md-2">
+                             Id: <span class="text-primary">{{myAssignment.assignmentId}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="text-primary"> {{myAssignment.queTitle}}</span>
+                        </div>
+                     <div class="col-md-2">
+                         Issue: <span class="text-primary">{{myAssignment.allocatedOn | date:'dd-MMM-yyyy'}}</span> 
+                     </div>
+                     </div>
+                     <!-- , File Submission -->
+                     <div class="row mt-1">
+                         <div class="col-md-2">
+                             Status: <span class="text-primary">{{myAssignment.status}}</span>
+                         </div>
+                         <div class="col-md-2">
+                             File Submission: <span class="text-primary">{{myAssignment.isFileSubmitRequired}}</span>
+                         </div>
+                     </div>
+                     <!--  Description Label-->
+                     <div class="row mt-1">
+                         <div class="col-md-2">
+                             Details
+                         </div>
+                     </div>
+                     <!--  Description as HTML-->
+                     <div class="row mt-1">
+                         <div class="col-md-12" [innerHtml]="myAssignment.queHtml">
+                         </div>
+                     </div>
+                    </div>
+                    <!-- Submission Details - Notes Submission Notes -- Enable if and only if status is not approv   -->
+                     <div class="container" *ngIf="myAssignment.status!='Done'">
+                        <div class="d-flex justify-content-center  d-block bg-primary text-white">
+                            <label for="notes" >Submission Notes</label>
+                        </div>
+                        <div class="row  mt-1 " >
+                            <div class="col-md-12">
+                                    <textarea id="notes" class="col-md-12" name="notes" type="text" formControlName="comments" rows="6"></textarea>
+                            </div>   
+                            <!-- To submit reference file - file upload -->
+                            <div class="row col-md-12 mt-1 mb-3">
+                                <div class="col-md-2">
+                                    Reference File
+                                </div>
+                                <div class="row col-md-10">
+                                    <div class="col-md-3">
+                                        <p-fileUpload #pfUpload mode="basic" name="file" id="file" accept=".doc,.docx,.pdf,.java,.c,.cpp,.txt,.zip" maxFileSize="1000000" 
+                                            (onSelect)="onSelect($event)"
+                                        >
+                                        </p-fileUpload>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-secondary" (click)="clearFileSelection(pfUpload)">Remove File</button>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- Action Buttons -->
+                        <div class="p-card mt-2">
+                            <div class="col-md-12 d-flex justify-content-end">
+                                    <button icon="pi pi-check"  label="Save" type="submit" class="mb-2" pButton></button>
+                                    <button label="Cancel" icon="pi pi-times" class="ml-2 mb-2" [routerLink]="['/myassignments']" pButton></button>
+                        </div>
+                 </div>
+                     </div>   
+            </div>
+            
+        </form>
+
+        <!-- To display history log for this assignment -->
+        <div class="container mt-3">
+            <div class="d-flex justify-content-center  d-block bg-primary text-white">
+                <label for="notes" >Submission log</label>
+            </div>
+           
+            <div class="container">
+                <div class="row col-md-12" *ngFor="let item of assignmentLog">
+                     <!-- comments -->
+                    <div class="row col-md-12">
+                        {{item.comments}}    
+                    </div>
+                    <!-- Reference Document - Status - CreatedBy - Created On -->
+                    <div class=" row  col-md-12 mt-2  ">
+                            <div class="col-md-8"  >
+                                <div class="col-md-6">
+                                    <span class="text-primary">{{item.storedAsFilename}}</span>  
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="text-primary">{{item.status}}</span>  
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <div class="col-md-6">
+                                    <span class="text-primary">{{item.createdBy}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="text-primary">{{item.createdOn |date:'dd-MMM-yyyy'}} </span>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- Separator -->
+                    <div class=" row  col-md-12 mt-1  ">
+                        <hr width="100%" color="red" style="height: 2px;">
+                    </div>
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- To display error -->
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+</div>

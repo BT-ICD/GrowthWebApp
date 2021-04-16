@@ -5,11 +5,19 @@
             <div class="col-md-4">
                 <h5 class="mt-2">Assignments</h5>
             </div>
+            <div class="col-md-8 d-flex justify-content-end">
+                <div class="row">
+                    <div class="col mr-2">
+                        <button pButton type="button" label="Detail" icon="pi pi-card" (click)="assignmentDetail()" ></button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Table - List of Assignments -->
         <div class="row mt-1">
             <div class="col-md-12">
-                <p-table #dt [columns]="cols" [value]="assignmentList" [paginator]="true" [rows]="10"
+                <p-table #dt [columns]="cols" [value]="assignmentList" [paginator]="true" [rows]="10" selectionMode="single"
+                   [(selection)]="selectedAssignment"
                     styleClass="p-datatable-sm p-datatable-responsive-demo">
                     <ng-template pTemplate="caption">
                         <div class="form-group row">

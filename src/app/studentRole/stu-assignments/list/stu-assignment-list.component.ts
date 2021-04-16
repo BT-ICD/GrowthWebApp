@@ -32,10 +32,19 @@ export class StuAssignmentListComponent implements OnInit, OnDestroy {
   defineColumnsForList():void{
     this.cols =[
       {field:'assignmentId',header:'Id', width:'07%' },
-      {field:'queTitle',header:'Assignment', width:'60%'},
-      {field:'allocatedOn',header:'Allocated', width:'15%'},
-      {field:'status',header:'Batch', display:'none'}
+      {field:'subjectName',header:'Subject', width:'30%' },
+      {field:'queTitle',header:'Assignment', width:'40%'},
+      {field:'status',header:'Status',width:'15%'},
+      {field:'allocatedOn',header:'Allocated', width:'13%'}
+      
     ]
+  }
+  assignmentDetail():void{
+    if(!this.selectedAssignment){
+      alert('None assignment selected. Please select assignment and try again.');
+      return;
+    }
+    this.router.navigate(['myassignment', this.selectedAssignment.assignmentAllocationId]);
   }
   ngOnDestroy(): void {
     if(this.dataSub){
