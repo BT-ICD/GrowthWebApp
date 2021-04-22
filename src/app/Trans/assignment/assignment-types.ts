@@ -20,14 +20,16 @@ export interface IAssignmentDTODetail {
     queHtml:string,
     notes:string,
     subjectId:number,
-    subjectName:string
+    subjectName:string,
+    isFileSubmitRequired:boolean
 
 }
 export interface IAssignmentDTOAdd {
     queTitle:string,
     queHtml:string,
     notes:string,
-    subjectId:number
+    subjectId:number,
+    isFileSubmitRequired:boolean
 }
 export interface IAssignmentListResolver{
     assignmentList:IAssignmentDTOList[],
@@ -45,4 +47,26 @@ export interface IAssignmentAllocationDTOAdd{
 export interface IAssignmentAllocationStudents{
     batchId:number;
     studentIds:string;
+}
+export interface IStatusSummaries{
+    status:number,
+    statusDesc:string,
+    numberofStudents:number
+}
+export interface IAssignmentReviewDTOList{
+    assignmentDTODetail:IAssignmentDTODetail,
+    statusSummaries:IStatusSummaries[]
+}
+export interface IAssignmentReviewResolve{
+    assignmentReviewDTOList:IAssignmentReviewDTOList,
+    error?:string
+}
+export interface IAssignmentLogDTOReviewListStudent{
+    assignmentId:number,
+    status:number,
+    statusDesc:string,
+    studentName:string,
+    studentId:number,
+    assignmentAllocationId:number,
+    submittedOn:Date
 }

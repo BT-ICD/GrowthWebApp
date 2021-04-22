@@ -37,7 +37,8 @@ subjectListResolve:ISubjectLookupResolver;
       queTitle:['',Validators.required],
       queHtml:[''],
       notes:[''],
-      subjectId:[null,Validators.required]
+      subjectId:[null,Validators.required],
+      isFileSubmitRequired:[false]
     });
   }
   onSubmit():void{

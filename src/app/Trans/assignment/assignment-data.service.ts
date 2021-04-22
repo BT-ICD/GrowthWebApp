@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
 import { IDeleteResponse, IRecordsAffectedResponse } from 'src/app/Core/types/common-types';
-import { IAssignmentAllocationDTOAdd, IAssignmentDTOAdd, IAssignmentDTODetail, IAssignmentDTOEdit, IAssignmentDTOList } from './assignment-types';
+import { IAssignmentAllocationDTOAdd, IAssignmentDTOAdd, IAssignmentDTODetail, IAssignmentDTOEdit, IAssignmentDTOList, IAssignmentLogDTOReviewListStudent, IAssignmentReviewDTOList } from './assignment-types';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +35,14 @@ export class AssignmentDataService {
     const url:string = this.dataConstantsService.BASEAPIURL + 'AssignmentAllocation/Add';
     return this.http.post<IRecordsAffectedResponse>(url,data);
     
+  }
+  getReviewList(assignmentId:number):Observable<IAssignmentReviewDTOList>{
+    const url:string = this.dataConstantsService.BASEAPIURL + 'Assignment/ReviewList/' + assignmentId;
+    return this.http.get<IAssignmentReviewDTOList>(url);
+  }
+  getReviewListStudentByStatus(assignmentId:number, status:number):Observable<IAssignmentLogDTOReviewListStudent[]>{
+    const url:string = this.dataConstantsService.BASEAPIURL + 'AssignmentAllocation/ReviewListStudentByStatus/' + assignmentId +'/' + status;
+    console.log(url);
+    return this.http.get<IAssignmentLogDTOReviewListStudent[]>(url);
   }
 }

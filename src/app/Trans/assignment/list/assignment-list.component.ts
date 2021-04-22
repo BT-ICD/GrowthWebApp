@@ -55,10 +55,21 @@ export class AssignmentListComponent implements OnInit, OnDestroy {
   }
   initializeActionItems():void{
     this.actionItems = [
-      {label: 'Allocate Assignment', icon: 'pi pi-users', command: () => {
-          this.allocateAssignment();
-      }}
-     
+      {
+        label: 'Related Documents', icon: 'pi pi-document', command: () => {
+          this.assignmentDocuments();
+        }
+      },
+      {
+        label: 'Allocate Assignment', icon: 'pi pi-users', command: () => {
+        this.allocateAssignment();
+        }
+      },
+      {
+        label: 'Review Assignment', icon: 'pi pi-users', command: () => {
+        this.assignmentReview();
+        }
+      }
   ];
   }
   initializeColumns():void{
@@ -96,8 +107,12 @@ export class AssignmentListComponent implements OnInit, OnDestroy {
       this.deleteRecSub.unsubscribe();
     }
   }
-  assignmentDocuments(assignment:IAssignmentDTODetail):void{
-    this.router.navigate(['assignmentdoc',assignment.assignmentId, assignment.queTitle, assignment.subjectName]);
+  assignmentDocuments():void{
+    if(!this.selectedAssignment){
+      alert('None assignment selected. Please select an assignment to allocate');
+      return;
+    }
+    this.router.navigate(['assignmentdoc',this.selectedAssignment.assignmentId, this.selectedAssignment.queTitle, this.selectedAssignment.subjectName]);
   }
   allocateAssignment():void{
     if(!this.selectedAssignment){
@@ -105,6 +120,13 @@ export class AssignmentListComponent implements OnInit, OnDestroy {
       return;
     }
     this.displayAllocationDialog=true;
+  }
+  assignmentReview():void{
+    if(!this.selectedAssignment){
+      alert('None assignment selected. Please select an assignment to review');
+      return;
+    }
+    this.router.navigate(['assignmentreview',this.selectedAssignment.assignmentId]);
   }
   onAllocationDialogHide():void{
     this.displayAllocationDialog=false;

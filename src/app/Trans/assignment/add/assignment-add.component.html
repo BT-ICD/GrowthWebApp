@@ -12,17 +12,20 @@
                     <!-- Subject -->
                     <div class="row mt-1">
                         <label for="subjectId" class="col-md-2" >Subject</label>
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <p-dropdown  id="subjectId" [options]="subjectLookup"  formControlName="subjectId" optionLabel="name" optionValue="subjectId"
                                 required="true" datakey="subjectId"  placeholder="Select Subject"
                             ></p-dropdown>
+                        </div>
+                        <div class="col-md-6">
+                            <p-checkbox formControlName="isFileSubmitRequired" [binary]="true" label="Required to submit file"></p-checkbox>
                         </div>
                     </div>
                     <!-- Question Title -->
                     <div class="row mt-1" >
                         <label for="queTitle" class="col-md-2" >Title</label>
                         <div class="col-md-8">
-                            <input id="queTitle" class="col-md-4" name="queTitle" type="text" formControlName="queTitle"  role="textbox"  pInputText 
+                            <input id="queTitle" class="col-md-11" name="queTitle" type="text" formControlName="queTitle"  role="textbox"  pInputText 
                                 [ngClass]="{'is-invalid':((assignmentForm.get('queTitle').touched ||assignmentForm.get('queTitle').dirty) &&
                                     !assignmentForm.get('queTitle').valid)
 
@@ -51,7 +54,7 @@
                     <div class="row mt-1">
                         <label for="notes" class="col-md-2" >Notes</label>
                         <div class="col-md-8">
-                            <textarea id="notes" class="col-md-4" name="notes" type="text" formControlName="notes"  rows="4"></textarea>
+                            <textarea id="notes" class="col-md-12" name="notes" type="text" formControlName="notes"  rows="4"></textarea>
                         </div>
                     </div>
                     
