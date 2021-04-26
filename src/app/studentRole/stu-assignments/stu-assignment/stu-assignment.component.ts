@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileUpload } from 'primeng/fileupload';
+import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
 import { StuAssignmentDataService } from '../stu-assignment-data.service';
 import { IAssignmentLogDTODetail, IAssignmentLogResolve, IMyAssignmentResolve, IMyAssignments } from '../stu-assignment-types';
 
@@ -21,7 +22,7 @@ export class StuAssignmentComponent implements OnInit {
   
   @ViewChild('pfUpload') pfUpload:ElementRef;
 
-  constructor(private route:ActivatedRoute, private router:Router, private fb:FormBuilder, private stuAssignmentDataService:StuAssignmentDataService) { }
+  constructor(private route:ActivatedRoute, private router:Router, private fb:FormBuilder, private dataConstantsService:DataConstantsService, private stuAssignmentDataService:StuAssignmentDataService) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -50,6 +51,10 @@ export class StuAssignmentComponent implements OnInit {
       }
     );
   }
+  get comments():FormControl{
+    // return this.assignmentForm.controls['comments'] as FormControl;
+    return this.assignmentForm.get('comments') as FormControl;
+  }
   onSelect(evetData){
     this.fileData = <File>evetData.files[0];
   }
@@ -61,13 +66,30 @@ export class StuAssignmentComponent implements OnInit {
      
    }
   onSubmit():void{
-    const formData = new FormData();
-    formData.append('assignmentAllocationId',this.myAssignment.assignmentAllocationId.toString());
-    formData.append('comments',this.assignmentForm.get('comments').value);
-    formData.append('file',this.fileData);
+    if(this.comments.invalid){
+      alert('Comments is required');
+      return;
+    }
+    if(this.assignmentForm.valid){
+      const formData = new FormData();
+      formData.append('assignmentAllocationId',this.myAssignment.assignmentAllocationId.toString());
+      formData.append('comments',this.assignmentForm.get('comments').value);
+      formData.append('file',this.fileData);
+      
+      this.stuAssignmentDataService.submitAssignment(formData).subscribe((data)=>{
+        this.router.navigate(['myassignments']);
+      })
+    }
     
-    this.stuAssignmentDataService.submitAssignment(formData).subscribe((data)=>{
-      this.router.navigate(['myassignments']);
-    })
+  }
+  downloadRefDocument():void{
+    const url:string = this.dataConstantsService.BASEAPIURL +'StudentAssignment/Download/' + this.myAssignment.assignmentId;
+    console.log(url);
+    const link = document.createElement('a');
+    link.setAttribute('type', 'hidden');
+    link.setAttribute('href', url);
+    document.body.append(link);
+    link.click();
+    link.remove();
   }
 }

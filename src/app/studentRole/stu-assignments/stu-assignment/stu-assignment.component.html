@@ -10,38 +10,39 @@
         <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
             <div class="p-card mt-2 ">
                     <div class="container">
-                                        <!-- Assignment Id - Question Title and Allocated On -->
-                    <div class="row mt-1" >
-                        <div class="col-md-2">
-                             Id: <span class="text-primary">{{myAssignment.assignmentId}}</span>
+                    <!-- Assignment Id - Question Title and Allocated On -->
+                        <div class="row mt-1" >
+                            <div class="col-md-2">
+                                Id: <span class="text-primary">{{myAssignment.assignmentId}}</span>
+                            </div>
+                            <div class="col-md-8">
+                                <span class="text-primary"> {{myAssignment.queTitle}}</span>
+                            </div>
+                            <div class="col-md-2">
+                                Issue: <span class="text-primary">{{myAssignment.allocatedOn | date:'dd-MMM-yyyy'}}</span> 
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <span class="text-primary"> {{myAssignment.queTitle}}</span>
-                        </div>
-                     <div class="col-md-2">
-                         Issue: <span class="text-primary">{{myAssignment.allocatedOn | date:'dd-MMM-yyyy'}}</span> 
-                     </div>
-                     </div>
-                     <!-- , File Submission -->
+                     <!-- , File Submission and download reference document -->
                      <div class="row mt-1">
                          <div class="col-md-2">
                              Status: <span class="text-primary">{{myAssignment.status}}</span>
                          </div>
-                         <div class="col-md-2">
+                         <div class="col-md-8">
                              File Submission: <span class="text-primary">{{myAssignment.isFileSubmitRequired}}</span>
                          </div>
-                     </div>
-                     <!--  Description Label-->
-                     <div class="row mt-1">
                          <div class="col-md-2">
-                             Details
-                         </div>
+                            <button type="button" class="btn btn-primary btn-sm" (click)="downloadRefDocument()">Reference Document</button>
+                        </div>
                      </div>
-                     <!--  Description as HTML-->
-                     <div class="row mt-1">
-                         <div class="col-md-12" [innerHtml]="myAssignment.queHtml">
-                         </div>
-                     </div>
+                     <!--  Details as HTML-->
+                    <div class=" mt-1 mb-2 col-md-12 d-flex justify-content-center">
+                        <div class="row col-md-12 d-flex justify-content-center">
+                            <p-panel header="Detail" class="col-md-12" [toggleable]="true" [collapsed]="true">
+                                <div [innerHtml]="myAssignment.queHtml">
+                                </div>
+                            </p-panel>
+                        </div>
+                    </div>
                     </div>
                     <!-- Submission Details - Notes Submission Notes -- Enable if and only if status is not approv   -->
                      <div class="container" *ngIf="myAssignment.status!='Done'">
@@ -50,7 +51,16 @@
                         </div>
                         <div class="row  mt-1 " >
                             <div class="col-md-12">
-                                    <textarea id="notes" class="col-md-12" name="notes" type="text" formControlName="comments" rows="6"></textarea>
+                                    <textarea id="notes" class="col-md-12" name="notes" type="text" formControlName="comments" rows="6"
+                                    [ngClass]="{'is-invalid':(comments.touched ||comments.dirty) && !comments.valid}"
+                                    >
+
+                                    </textarea>
+                                    <span class="invalid-feedback">
+                                        <span *ngIf="comments.errors?.required">
+                                            Comments is required
+                                        </span>
+                                    </span>
                             </div>   
                             <!-- To submit reference file - file upload -->
                             <div class="row col-md-12 mt-1 mb-3" *ngIf="myAssignment.isFileSubmitRequired">

@@ -26,5 +26,6 @@ export class StuAssignmentDataService {
     const url:string = this.dataConstantsService.BASEAPIURL +'AssignmentAllocation/LogList/' + assignmentAllocationId;
     return this.http.get<IAssignmentLogDTODetail[]>(url);
   }
+ 
 
 }
