@@ -69,4 +69,28 @@ export interface IAssignmentLogDTOReviewListStudent{
     studentId:number,
     assignmentAllocationId:number,
     submittedOn:Date
+    assignmentLogId:number,
+    comments:string,
+    actualFileName:string
+
+}
+
+export interface IAssignmenReviewListLogResolve{
+    assignmentListStudent:IAssignmentLogDTOReviewListStudent[],
+    error?:string
+}
+export interface IAssignmentLogDTODetail{
+    assignmentLogId:number,
+    assignmentAllocationId:number,
+    status:string,
+    comments:string,
+    storedAsFilename:string,
+    createdBy:string,
+    createdOn:Date
+}
+export interface IassignmentLogDTOAdd{
+    assignmentAllocationId:number,
+    comments:string,
+    status:number,
+    actualFileName:string; //TODO: No use of this property for a now. In future allow faculty to upload reference file for student review as a hint
 }

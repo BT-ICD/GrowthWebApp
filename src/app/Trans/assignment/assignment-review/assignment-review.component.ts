@@ -59,6 +59,6 @@ export class AssignmentReviewComponent implements OnInit {
     
   }
   viewSubmission(data:IAssignmentLogDTOReviewListStudent):void{
-    console.log(data);
+    this.router.navigate(['/assignmentreviewnote', data.assignmentId, data.status, data.studentId]);
   }
 }

@@ -14,11 +14,13 @@ import { BatchLookupResolverService } from 'src/app/Core/services/batch-lookup-r
 import { StudentLookupResolverService } from 'src/app/Core/services/resolvers/student-lookup-resolver.service';
 import { AssignmentReviewComponent } from './assignment-review/assignment-review.component';
 import { AssigmmentReviewResolveService } from './assigmment-review-resolve.service';
+import { AssignmentReviewNoteComponent } from './assignment-review-note/assignment-review-note.component';
+import { AssignmentReviewNoteResolveService } from './assignment-review-note-resolve.service';
 
 
 
 @NgModule({
-  declarations: [AssignmentListComponent,AssignmentAddComponent,AssignmentEditComponent, AssignmentReviewComponent],
+  declarations: [AssignmentListComponent,AssignmentAddComponent,AssignmentEditComponent, AssignmentReviewComponent, AssignmentReviewNoteComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -43,6 +45,11 @@ import { AssigmmentReviewResolveService } from './assigmment-review-resolve.serv
         path:'assignmentreview/:id',
         component:AssignmentReviewComponent,
         resolve:{resolveData:AssigmmentReviewResolveService}
+      },
+      {
+        path:'assignmentreviewnote/:id/:status/:studentid',
+        component:AssignmentReviewNoteComponent,
+        resolve:{resolveData:AssignmentReviewNoteResolveService}
       }
 
     ])
