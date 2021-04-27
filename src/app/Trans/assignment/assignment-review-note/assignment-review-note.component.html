@@ -53,8 +53,13 @@
                 <div class="d-flex justify-content-center  d-block bg-primary text-white">
                     <label>Details submitted by student</label>
                 </div>
-                <div class="row mt-1" *ngIf="selectedassignment">
-                    {{selectedassignment.comments}}
+                <div class="row  col-md-12" *ngIf="selectedassignment">
+                    <div class="row mt-1 col-md-12" >
+                        {{selectedassignment.comments}}
+                    </div>
+                    <div class="row mt-1 col-md-12 d-flex justify-content-end" *ngIf="selectedassignment.storedAsFilename && selectedassignment.storedAsFilename!=''">
+                            <button type="button" class="btn btn-warning btn-sm" (click)="downloadRefDocument()">Download submitted reference document </button>
+                    </div>
                 </div>
             </div> 
             

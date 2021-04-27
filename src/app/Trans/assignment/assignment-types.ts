@@ -71,7 +71,7 @@ export interface IAssignmentLogDTOReviewListStudent{
     submittedOn:Date
     assignmentLogId:number,
     comments:string,
-    actualFileName:string
+    storedAsFilename:string
 
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataConstantsService } from 'src/app/Core/services/data-constants.service';
 import { AssignmentDataService } from '../assignment-data.service';
 import { IAssignmenReviewListLogResolve, IAssignmentAllocationStudents, IassignmentLogDTOAdd, IAssignmentLogDTOReviewListStudent } from '../assignment-types';
 
@@ -15,7 +16,7 @@ export class AssignmentReviewNoteComponent implements OnInit {
   selectedassignment:IAssignmentLogDTOReviewListStudent;
   errorMessage:string;
   colsStudents:any[];
-  constructor(private route:ActivatedRoute,private router:Router, private fb:FormBuilder ,private assignmentDataService:AssignmentDataService) { }
+  constructor(private route:ActivatedRoute,private router:Router, private fb:FormBuilder , private dataConstantsService:DataConstantsService, private assignmentDataService:AssignmentDataService) { }
   comments:string;
   ngOnInit(): void {
     this.loadData();
@@ -56,5 +57,13 @@ export class AssignmentReviewNoteComponent implements OnInit {
         this.router.navigate(['assignmentreview', this.selectedassignment.assignmentId]);
       });
     }
-  
+    downloadRefDocument():void{
+      const url:string = this.dataConstantsService.BASEAPIURL +'AssignmentAllocation/DownloadSubmittedDocument/' + this.selectedassignment.assignmentLogId;
+      const link = document.createElement('a');
+      link.setAttribute('type', 'hidden');
+      link.setAttribute('href', url);
+      document.body.append(link);
+      link.click();
+      link.remove();
+    }
 }
